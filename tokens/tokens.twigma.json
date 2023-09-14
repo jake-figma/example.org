@@ -5,499 +5,503 @@
         "modes": ["day", "night"]
       }
     },
-    "bg-strong": {
-      "$type": "color",
-      "$value": "{@primitive_color_mono-500}",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "{@primitive_color_mono-500}",
-            "night": "{@primitive_color_mono-100}"
+    "color": {
+      "bg-strong": {
+        "$type": "color",
+        "$value": "{@primitive_color_color.mono-500}",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "{@primitive_color_color.mono-500}",
+              "night": "{@primitive_color_color.mono-100}"
+            }
           }
         }
-      }
-    },
-    "bg-scrim": {
-      "$type": "color",
-      "$value": "rgba(0, 0, 0, 0.7000)",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "rgba(0, 0, 0, 0.7000)",
-            "night": "rgba(0, 0, 0, 0.7000)"
+      },
+      "bg-scrim": {
+        "$type": "color",
+        "$value": "rgba(0, 0, 0, 0.7000)",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "rgba(0, 0, 0, 0.7000)",
+              "night": "rgba(0, 0, 0, 0.7000)"
+            }
           }
         }
-      }
-    },
-    "border-success": {
-      "$type": "color",
-      "$value": "{@primitive_color_green-400}",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "{@primitive_color_green-400}",
-            "night": "{@primitive_color_green-200}"
+      },
+      "border-success": {
+        "$type": "color",
+        "$value": "{@primitive_color_color.green-400}",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "{@primitive_color_color.green-400}",
+              "night": "{@primitive_color_color.green-200}"
+            }
           }
         }
-      }
-    },
-    "text-inactive": {
-      "$type": "color",
-      "$value": "{@primitive_color_mono-300}",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "{@primitive_color_mono-300}",
-            "night": "{@primitive_color_mono-300}"
+      },
+      "text-inactive": {
+        "$type": "color",
+        "$value": "{@primitive_color_color.mono-300}",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "{@primitive_color_color.mono-300}",
+              "night": "{@primitive_color_color.mono-300}"
+            }
           }
         }
-      }
-    },
-    "border-inactive": {
-      "$type": "color",
-      "$value": "{@primitive_color_mono-300}",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "{@primitive_color_mono-300}",
-            "night": "{@primitive_color_mono-400}"
+      },
+      "border-inactive": {
+        "$type": "color",
+        "$value": "{@primitive_color_color.mono-300}",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "{@primitive_color_color.mono-300}",
+              "night": "{@primitive_color_color.mono-400}"
+            }
           }
         }
-      }
-    },
-    "bg-brand-secondary-hover": {
-      "$type": "color",
-      "$value": "{@primitive_color_purple-500}",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "{@primitive_color_purple-500}",
-            "night": "{@primitive_color_purple-300}"
+      },
+      "bg-brand-secondary-hover": {
+        "$type": "color",
+        "$value": "{@primitive_color_color.purple-500}",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "{@primitive_color_color.purple-500}",
+              "night": "{@primitive_color_color.purple-300}"
+            }
           }
         }
-      }
-    },
-    "border-default": {
-      "$type": "color",
-      "$value": "{@primitive_color_mono-300}",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "{@primitive_color_mono-300}",
-            "night": "{@primitive_color_mono-300}"
+      },
+      "border-default": {
+        "$type": "color",
+        "$value": "{@primitive_color_color.mono-300}",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "{@primitive_color_color.mono-300}",
+              "night": "{@primitive_color_color.mono-300}"
+            }
           }
         }
-      }
-    },
-    "border-strong": {
-      "$type": "color",
-      "$value": "{@primitive_color_mono-500}",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "{@primitive_color_mono-500}",
-            "night": "{@primitive_color_mono-100}"
+      },
+      "border-strong": {
+        "$type": "color",
+        "$value": "{@primitive_color_color.mono-500}",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "{@primitive_color_color.mono-500}",
+              "night": "{@primitive_color_color.mono-100}"
+            }
           }
         }
-      }
-    },
-    "bg-warning": {
-      "$type": "color",
-      "$value": "{@primitive_color_yellow-100}",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "{@primitive_color_yellow-100}",
-            "night": "{@primitive_color_yellow-500}"
+      },
+      "bg-warning": {
+        "$type": "color",
+        "$value": "{@primitive_color_color.yellow-100}",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "{@primitive_color_color.yellow-100}",
+              "night": "{@primitive_color_color.yellow-500}"
+            }
           }
         }
-      }
-    },
-    "icon-contrast": {
-      "$type": "color",
-      "$value": "{@primitive_color_mono-100}",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "{@primitive_color_mono-100}",
-            "night": "{@primitive_color_mono-500}"
+      },
+      "icon-contrast": {
+        "$type": "color",
+        "$value": "{@primitive_color_color.mono-100}",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "{@primitive_color_color.mono-100}",
+              "night": "{@primitive_color_color.mono-500}"
+            }
           }
         }
-      }
-    },
-    "text-error": {
-      "$type": "color",
-      "$value": "{@primitive_color_red-500}",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "{@primitive_color_red-500}",
-            "night": "{@primitive_color_red-100}"
+      },
+      "text-error": {
+        "$type": "color",
+        "$value": "{@primitive_color_color.red-500}",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "{@primitive_color_color.red-500}",
+              "night": "{@primitive_color_color.red-100}"
+            }
           }
         }
-      }
-    },
-    "text-contrast": {
-      "$type": "color",
-      "$value": "{@primitive_color_mono-100}",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "{@primitive_color_mono-100}",
-            "night": "{@primitive_color_mono-500}"
+      },
+      "text-contrast": {
+        "$type": "color",
+        "$value": "{@primitive_color_color.mono-100}",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "{@primitive_color_color.mono-100}",
+              "night": "{@primitive_color_color.mono-500}"
+            }
           }
         }
-      }
-    },
-    "border-brand": {
-      "$type": "color",
-      "$value": "{@primitive_color_blue-400}",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "{@primitive_color_blue-400}",
-            "night": "{@primitive_color_blue-200}"
+      },
+      "border-brand": {
+        "$type": "color",
+        "$value": "{@primitive_color_color.blue-400}",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "{@primitive_color_color.blue-400}",
+              "night": "{@primitive_color_color.blue-200}"
+            }
           }
         }
-      }
-    },
-    "bg-brand-secondary-active": {
-      "$type": "color",
-      "$value": "{@primitive_color_purple-300}",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "{@primitive_color_purple-300}",
-            "night": "{@primitive_color_purple-100}"
+      },
+      "bg-brand-secondary-active": {
+        "$type": "color",
+        "$value": "{@primitive_color_color.purple-300}",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "{@primitive_color_color.purple-300}",
+              "night": "{@primitive_color_color.purple-100}"
+            }
           }
         }
-      }
-    },
-    "bg-success-active": {
-      "$type": "color",
-      "$value": "{@primitive_color_green-300}",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "{@primitive_color_green-300}",
-            "night": "{@primitive_color_green-500}"
+      },
+      "bg-success-active": {
+        "$type": "color",
+        "$value": "{@primitive_color_color.green-300}",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "{@primitive_color_color.green-300}",
+              "night": "{@primitive_color_color.green-500}"
+            }
           }
         }
-      }
-    },
-    "icon-default": {
-      "$type": "color",
-      "$value": "{@primitive_color_mono-500}",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "{@primitive_color_mono-500}",
-            "night": "{@primitive_color_mono-100}"
+      },
+      "icon-default": {
+        "$type": "color",
+        "$value": "{@primitive_color_color.mono-500}",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "{@primitive_color_color.mono-500}",
+              "night": "{@primitive_color_color.mono-100}"
+            }
           }
         }
-      }
-    },
-    "bg-brand-active": {
-      "$type": "color",
-      "$value": "{@primitive_color_blue-300}",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "{@primitive_color_blue-300}",
-            "night": "{@primitive_color_blue-100}"
+      },
+      "bg-brand-active": {
+        "$type": "color",
+        "$value": "{@primitive_color_color.blue-300}",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "{@primitive_color_color.blue-300}",
+              "night": "{@primitive_color_color.blue-100}"
+            }
           }
         }
-      }
-    },
-    "bg-success-hover": {
-      "$type": "color",
-      "$value": "{@primitive_color_green-200}",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "{@primitive_color_green-200}",
-            "night": "{@primitive_color_green-500}"
+      },
+      "bg-success-hover": {
+        "$type": "color",
+        "$value": "{@primitive_color_color.green-200}",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "{@primitive_color_color.green-200}",
+              "night": "{@primitive_color_color.green-500}"
+            }
           }
         }
-      }
-    },
-    "bg-inactive": {
-      "$type": "color",
-      "$value": "{@primitive_color_mono-300}",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "{@primitive_color_mono-300}",
-            "night": "{@primitive_color_mono-300}"
+      },
+      "bg-inactive": {
+        "$type": "color",
+        "$value": "{@primitive_color_color.mono-300}",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "{@primitive_color_color.mono-300}",
+              "night": "{@primitive_color_color.mono-300}"
+            }
           }
         }
-      }
-    },
-    "focus-ring": {
-      "$type": "color",
-      "$value": "{@primitive_color_blue-300}",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "{@primitive_color_blue-300}",
-            "night": "{@primitive_color_blue-400}"
+      },
+      "focus-ring": {
+        "$type": "color",
+        "$value": "{@primitive_color_color.blue-300}",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "{@primitive_color_color.blue-300}",
+              "night": "{@primitive_color_color.blue-400}"
+            }
           }
         }
-      }
-    },
-    "bg-default": {
-      "$type": "color",
-      "$value": "{@primitive_color_mono-100}",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "{@primitive_color_mono-100}",
-            "night": "{@primitive_color_mono-500}"
+      },
+      "bg-default": {
+        "$type": "color",
+        "$value": "{@primitive_color_color.mono-100}",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "{@primitive_color_color.mono-100}",
+              "night": "{@primitive_color_color.mono-500}"
+            }
           }
         }
-      }
-    },
-    "bg-brand-secondary": {
-      "$type": "color",
-      "$value": "{@primitive_color_purple-400}",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "{@primitive_color_purple-400}",
-            "night": "{@primitive_color_purple-200}"
+      },
+      "bg-brand-secondary": {
+        "$type": "color",
+        "$value": "{@primitive_color_color.purple-400}",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "{@primitive_color_color.purple-400}",
+              "night": "{@primitive_color_color.purple-200}"
+            }
           }
         }
-      }
-    },
-    "text-link": {
-      "$type": "color",
-      "$value": "{@primitive_color_blue-400}",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "{@primitive_color_blue-400}",
-            "night": "{@primitive_color_blue-200}"
+      },
+      "text-link": {
+        "$type": "color",
+        "$value": "{@primitive_color_color.blue-400}",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "{@primitive_color_color.blue-400}",
+              "night": "{@primitive_color_color.blue-200}"
+            }
           }
         }
-      }
-    },
-    "bg-brand-hover": {
-      "$type": "color",
-      "$value": "{@primitive_color_blue-500}",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "{@primitive_color_blue-500}",
-            "night": "{@primitive_color_blue-300}"
+      },
+      "bg-brand-hover": {
+        "$type": "color",
+        "$value": "{@primitive_color_color.blue-500}",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "{@primitive_color_color.blue-500}",
+              "night": "{@primitive_color_color.blue-300}"
+            }
           }
         }
-      }
-    },
-    "bg-brand": {
-      "$type": "color",
-      "$value": "{@primitive_color_blue-400}",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "{@primitive_color_blue-400}",
-            "night": "{@primitive_color_blue-200}"
+      },
+      "bg-brand": {
+        "$type": "color",
+        "$value": "{@primitive_color_color.blue-400}",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "{@primitive_color_color.blue-400}",
+              "night": "{@primitive_color_color.blue-200}"
+            }
           }
         }
-      }
-    },
-    "text-body": {
-      "$type": "color",
-      "$value": "{@primitive_color_mono-500}",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "{@primitive_color_mono-500}",
-            "night": "{@primitive_color_mono-100}"
+      },
+      "text-body": {
+        "$type": "color",
+        "$value": "{@primitive_color_color.mono-500}",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "{@primitive_color_color.mono-500}",
+              "night": "{@primitive_color_color.mono-100}"
+            }
           }
         }
-      }
-    },
-    "bg-success": {
-      "$type": "color",
-      "$value": "{@primitive_color_green-100}",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "{@primitive_color_green-100}",
-            "night": "{@primitive_color_green-400}"
+      },
+      "bg-success": {
+        "$type": "color",
+        "$value": "{@primitive_color_color.green-100}",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "{@primitive_color_color.green-100}",
+              "night": "{@primitive_color_color.green-400}"
+            }
           }
         }
-      }
-    },
-    "icon-brand": {
-      "$type": "color",
-      "$value": "{@primitive_color_blue-400}",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "{@primitive_color_blue-400}",
-            "night": "{@primitive_color_blue-200}"
+      },
+      "icon-brand": {
+        "$type": "color",
+        "$value": "{@primitive_color_color.blue-400}",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "{@primitive_color_color.blue-400}",
+              "night": "{@primitive_color_color.blue-200}"
+            }
           }
         }
-      }
-    },
-    "bg-error": {
-      "$type": "color",
-      "$value": "{@primitive_color_red-100}",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "{@primitive_color_red-100}",
-            "night": "{@primitive_color_red-500}"
+      },
+      "bg-error": {
+        "$type": "color",
+        "$value": "{@primitive_color_color.red-100}",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "{@primitive_color_color.red-100}",
+              "night": "{@primitive_color_color.red-500}"
+            }
           }
         }
-      }
-    },
-    "border-error": {
-      "$type": "color",
-      "$value": "{@primitive_color_red-400}",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "{@primitive_color_red-400}",
-            "night": "{@primitive_color_red-200}"
+      },
+      "border-error": {
+        "$type": "color",
+        "$value": "{@primitive_color_color.red-400}",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "{@primitive_color_color.red-400}",
+              "night": "{@primitive_color_color.red-200}"
+            }
           }
         }
-      }
-    },
-    "bg-subtle": {
-      "$type": "color",
-      "$value": "{@primitive_color_mono-200}",
-      "$extensions": {
-        "org.twigma": {
-          "modes": {
-            "day": "{@primitive_color_mono-200}",
-            "night": "{@primitive_color_mono-400}"
+      },
+      "bg-subtle": {
+        "$type": "color",
+        "$value": "{@primitive_color_color.mono-200}",
+        "$extensions": {
+          "org.twigma": {
+            "modes": {
+              "day": "{@primitive_color_color.mono-200}",
+              "night": "{@primitive_color_color.mono-400}"
+            }
           }
         }
       }
     }
   },
   "@primitive_color": {
-    "purple-500": {
-      "$type": "color",
-      "$value": "#34005c"
-    },
-    "purple-400": {
-      "$type": "color",
-      "$value": "#7900d5"
-    },
-    "purple-300": {
-      "$type": "color",
-      "$value": "#a938ff"
-    },
-    "purple-200": {
-      "$type": "color",
-      "$value": "#eaceff"
-    },
-    "purple-100": {
-      "$type": "color",
-      "$value": "#f5e8ff"
-    },
-    "blue-500": {
-      "$type": "color",
-      "$value": "#00255c"
-    },
-    "blue-400": {
-      "$type": "color",
-      "$value": "#0055d5"
-    },
-    "blue-300": {
-      "$type": "color",
-      "$value": "#3887ff"
-    },
-    "blue-200": {
-      "$type": "color",
-      "$value": "#cee2ff"
-    },
-    "blue-100": {
-      "$type": "color",
-      "$value": "#e8f1ff"
-    },
-    "red-500": {
-      "$type": "color",
-      "$value": "#5c0000"
-    },
-    "yellow-500": {
-      "$type": "color",
-      "$value": "#5a5c00"
-    },
-    "yellow-200": {
-      "$type": "color",
-      "$value": "#feffce"
-    },
-    "yellow-100": {
-      "$type": "color",
-      "$value": "#ffffe8"
-    },
-    "yellow-300": {
-      "$type": "color",
-      "$value": "#fcff38"
-    },
-    "green-400": {
-      "$type": "color",
-      "$value": "#2baa37"
-    },
-    "red-100": {
-      "$type": "color",
-      "$value": "#ffe8e8"
-    },
-    "green-200": {
-      "$type": "color",
-      "$value": "#d8f5db"
-    },
-    "green-500": {
-      "$type": "color",
-      "$value": "#124918"
-    },
-    "mono-500": {
-      "$type": "color",
-      "$value": "#141414"
-    },
-    "red-300": {
-      "$type": "color",
-      "$value": "#ff3838"
-    },
-    "mono-400": {
-      "$type": "color",
-      "$value": "#878787"
-    },
-    "green-100": {
-      "$type": "color",
-      "$value": "#edfaee"
-    },
-    "mono-300": {
-      "$type": "color",
-      "$value": "#c7c7c7"
-    },
-    "red-400": {
-      "$type": "color",
-      "$value": "#d50000"
-    },
-    "yellow-400": {
-      "$type": "color",
-      "$value": "#d1d500"
-    },
-    "green-300": {
-      "$type": "color",
-      "$value": "#5fd76b"
-    },
-    "red-200": {
-      "$type": "color",
-      "$value": "#ffcece"
-    },
-    "mono-200": {
-      "$type": "color",
-      "$value": "#f0f0f0"
-    },
-    "mono-100": {
-      "$type": "color",
-      "$value": "#ffffff"
+    "color": {
+      "purple-500": {
+        "$type": "color",
+        "$value": "#34005c"
+      },
+      "purple-400": {
+        "$type": "color",
+        "$value": "#7900d5"
+      },
+      "purple-300": {
+        "$type": "color",
+        "$value": "#a938ff"
+      },
+      "purple-200": {
+        "$type": "color",
+        "$value": "#eaceff"
+      },
+      "purple-100": {
+        "$type": "color",
+        "$value": "#f5e8ff"
+      },
+      "blue-500": {
+        "$type": "color",
+        "$value": "#00255c"
+      },
+      "blue-400": {
+        "$type": "color",
+        "$value": "#0055d5"
+      },
+      "blue-300": {
+        "$type": "color",
+        "$value": "#3887ff"
+      },
+      "blue-200": {
+        "$type": "color",
+        "$value": "#cee2ff"
+      },
+      "blue-100": {
+        "$type": "color",
+        "$value": "#e8f1ff"
+      },
+      "red-500": {
+        "$type": "color",
+        "$value": "#5c0000"
+      },
+      "yellow-500": {
+        "$type": "color",
+        "$value": "#5a5c00"
+      },
+      "yellow-200": {
+        "$type": "color",
+        "$value": "#feffce"
+      },
+      "yellow-100": {
+        "$type": "color",
+        "$value": "#ffffe8"
+      },
+      "yellow-300": {
+        "$type": "color",
+        "$value": "#fcff38"
+      },
+      "green-400": {
+        "$type": "color",
+        "$value": "#2baa37"
+      },
+      "red-100": {
+        "$type": "color",
+        "$value": "#ffe8e8"
+      },
+      "green-200": {
+        "$type": "color",
+        "$value": "#d8f5db"
+      },
+      "green-500": {
+        "$type": "color",
+        "$value": "#124918"
+      },
+      "mono-500": {
+        "$type": "color",
+        "$value": "#141414"
+      },
+      "red-300": {
+        "$type": "color",
+        "$value": "#ff3838"
+      },
+      "mono-400": {
+        "$type": "color",
+        "$value": "#878787"
+      },
+      "green-100": {
+        "$type": "color",
+        "$value": "#edfaee"
+      },
+      "mono-300": {
+        "$type": "color",
+        "$value": "#c7c7c7"
+      },
+      "red-400": {
+        "$type": "color",
+        "$value": "#d50000"
+      },
+      "yellow-400": {
+        "$type": "color",
+        "$value": "#d1d500"
+      },
+      "green-300": {
+        "$type": "color",
+        "$value": "#5fd76b"
+      },
+      "red-200": {
+        "$type": "color",
+        "$value": "#ffcece"
+      },
+      "mono-200": {
+        "$type": "color",
+        "$value": "#f0f0f0"
+      },
+      "mono-100": {
+        "$type": "color",
+        "$value": "#ffffff"
+      }
     }
   },
   "@primitive_size": {
