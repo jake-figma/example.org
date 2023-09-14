@@ -9,6 +9,9 @@
   background: var(--color-bg-brand);
 }
 
+.storybook-button--primary:hover {
+  background: var(--color-bg-brand-hover);
+}
 .storybook-button--primary {
   color: white;
   background-color: var(--color-bg-brand);
