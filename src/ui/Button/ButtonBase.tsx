@@ -157,7 +157,7 @@ export const ButtonBase = ({
   }
 
   if (isComponentAnchorProps(props)) {
-    classNames.push("button-base-disabled");
+    if (disabled) classNames.push("button-base-disabled");
     return (
       <a
         aria-label={ariaLabel}

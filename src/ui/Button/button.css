@@ -30,13 +30,6 @@
   right: -2px;
   top: -2px;
 }
-.button-base-disabled,
-.button-base:disabled {
-  cursor: not-allowed;
-  pointer-events: none;
-  --button-bg: var(--color-bg-inactive);
-  --button-color: var(--color-text-body);
-}
 
 .button-base-variant-primary {
   --button-bg: var(--color-bg-brand);
@@ -59,5 +52,12 @@
   --button-bg: var(--color-bg-success);
   --button-bg-active: var(--color-bg-success-active);
   --button-bg-hover: var(--color-bg-success-hover);
+  --button-color: var(--color-text-body);
+}
+.button-base.button-base-disabled,
+.button-base:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  --button-bg: var(--color-bg-inactive);
   --button-color: var(--color-text-body);
 }
