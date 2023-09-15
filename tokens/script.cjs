@@ -33,22 +33,22 @@ const fileString = `
 
 :root {
   /* Size Primitive */
-${drawCSSPropLines(processed.size.primitive.default, "  ")}
+${drawCSSPropLines(processed.size.primitive.default, "  ")};
 
   /* Color Primitive */
-${drawCSSPropLines(processed.color.primitive.default, "  ")}
+${drawCSSPropLines(processed.color.primitive.default, "  ")};
 
   /* Size Semantic */
-${drawCSSPropLines(processed.size.semantic.default, "  ")}
+${drawCSSPropLines(processed.size.semantic.default, "  ")};
 
   /* Color Default Values (Light Mode) */
-${drawCSSPropLines(processed.color.semantic[SEMANTIC_MODES.light], "  ")}
+${drawCSSPropLines(processed.color.semantic[SEMANTIC_MODES.light], "  ")};
 }
 
 /* Color Dark Mode */
 @media (prefers-color-scheme: dark) {
   :root {
-${drawCSSPropLines(processed.color.semantic[SEMANTIC_MODES.dark], "    ")}
+${drawCSSPropLines(processed.color.semantic[SEMANTIC_MODES.dark], "    ")};
   }
 }
 `;
@@ -67,7 +67,7 @@ function drawCSSPropDefinition(lines) {
 
 function drawCSSPropLines(lines, indent = "  ") {
   return lines
-    .sort()
+    .sort((a, b) => (a.property > b.property ? 1 : -1))
     .map((l) => `${indent}${l.property}: ${l.value}`)
     .join(";\n");
 }
@@ -128,5 +128,5 @@ function valueToCSS(value, primitiveKey, semanticKey) {
       .replace(/\./g, "-")
       .replace(/^\{/, "")
       .replace(/\}$/, "")})`;
-  return value;
+  return value.toString().match(/^\d+$/) ? `${value}px` : value;
 }

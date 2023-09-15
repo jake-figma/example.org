@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, Header } from "ui";
+import { Header } from "ui";
 import "./page.css";
 
 type User = {
@@ -20,7 +20,6 @@ export const Page: React.FC = () => {
       />
 
       <section className="storybook-page">
-        <Button label="Tom" size="medium" />
         <h2>Pages in Storybook</h2>
         <p>
           We recommend building UIs with a{" "}

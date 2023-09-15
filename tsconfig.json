@@ -15,12 +15,10 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl" : "./src",
+    "baseUrl": "./src",
     "paths": {
-      "ui": ["./components/ui"],
-      "@": ["./*"]
+      "ui": ["./ui"]
     }
   },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["src"]
 }
