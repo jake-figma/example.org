@@ -1,0 +1,10 @@
+{
+  "name": "Token Visualizer",
+  "id": "123412341234",
+  "api": "1.0.0",
+  "editorType": ["figma"],
+  "capabilities": [],
+  "permissions": [],
+  "main": "code.js",
+  "networkAccess": { "allowedDomains": ["none"] }
+}
