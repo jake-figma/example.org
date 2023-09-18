@@ -4,14 +4,22 @@ const SNIPPETS = ["./src/ui/Button/button.snippet.json"];
 
 const snippets = SNIPPETS.reduce((into, path) => {
   const json = JSON.parse(fs.readFileSync(path));
-  const { tag, children, props } = json;
-  const snippet = [
-    `// ${path}`,
-    `<${tag}`,
-    ...renderProps(props),
-    children ? `>\n  ${children}\n</${tag}>` : "/>",
-  ];
-  into[tag] = snippet.filter(Boolean).join("\n");
+  const { tag, children, props, permutations } = json;
+  into[tag] = {
+    default: [
+      `// ${path}`,
+      `<${tag}`,
+      ...renderProps(props),
+      children ? `>\n  ${children}\n</${tag}>` : "/>",
+    ].join("\n"),
+  };
+  if (permutations) {
+    into[tag].permutations = [
+      `<${tag}`,
+      ...renderProps(Object.assign(props, permutations), true),
+      children ? `>\n  ${children}\n</${tag}>` : "/>",
+    ].join("\n");
+  }
   return into;
 }, {});
 
@@ -20,7 +28,12 @@ fs.writeFileSync(
   JSON.stringify(snippets, null, 2)
 );
 
-function renderProps(props, propsArr = [], indent = "  ") {
+function renderProps(
+  props,
+  isPermutations = null,
+  propsArr = [],
+  indent = "  "
+) {
   for (let propName in props) {
     const isOptional = Boolean(propName.match(/\?$/));
     const value = props[propName];
@@ -43,7 +56,13 @@ function renderProps(props, propsArr = [], indent = "  ") {
       for (let propValue in props[propName]) {
         const subArray = [];
         subArray.push(makePropString(`"${propValue}"`));
-        renderProps(props[propName][propValue], subArray, indent + "  ");
+        const nextIndent = isPermutations ? indent + "  " : indent;
+        renderProps(
+          props[propName][propValue],
+          isPermutations,
+          subArray,
+          nextIndent
+        );
         propsArr.push(subArray.join("\n"));
       }
     }

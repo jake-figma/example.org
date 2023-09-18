@@ -1,8 +1,23 @@
 {
   "tag": "Button",
-  "children": "@text",
+  "children": "@label",
   "props": {
-    "ariaLabel?": "\"Only when text is not descriptive of the action\"",
+    "ariaLabel?": "\"Only when label is not descriptive of the action\"",
+    "component": {
+      "button": {
+        "type": {
+          "button": {
+            "onClick": "() => alert(\"Required click event\")"
+          }
+        }
+      }
+    },
+    "disabled?": "true",
+    "iconEnd?": "<@iconEnd />",
+    "iconStart?": "<@iconStart />",
+    "variant": "\"@variant\""
+  },
+  "permutations": {
     "component": {
       "a": {
         "href": "\"https://www.example.org\"",
@@ -18,10 +33,6 @@
           }
         }
       }
-    },
-    "disabled?": "true",
-    "iconEnd?": "<@iconEnd />",
-    "iconStart?": "<@iconStart />",
-    "variant": "\"@variant\""
+    }
   }
 }
