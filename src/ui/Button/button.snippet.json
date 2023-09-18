@@ -1,0 +1,27 @@
+{
+  "tag": "Button",
+  "children": "@text",
+  "props": {
+    "ariaLabel?": "\"Only when text is not descriptive of the action\"",
+    "component": {
+      "a": {
+        "href": "\"https://www.example.org\"",
+        "onClick?": "() => alert(\"Optional click event\")"
+      },
+      "button": {
+        "type": {
+          "button": {
+            "onClick": "() => alert(\"Required click event\")"
+          },
+          "submit": {
+            "onClick?": "() => alert(\"Optional click event\")"
+          }
+        }
+      }
+    },
+    "disabled?": "true",
+    "iconEnd?": "<@iconEnd />",
+    "iconStart?": "<@iconStart />",
+    "variant": "\"@variant\""
+  }
+}

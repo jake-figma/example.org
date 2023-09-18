@@ -1,0 +1,11 @@
+{
+  "name": "Component Snippets",
+  "id": "1234123412345",
+  "api": "1.0.0",
+  "editorType": ["dev"],
+  "capabilities": ["codegen"],
+  "permissions": [],
+  "codegenLanguages": [{ "label": "Snippets", "value": "snippets" }],
+  "main": "code.js",
+  "networkAccess": { "allowedDomains": ["none"] }
+}
