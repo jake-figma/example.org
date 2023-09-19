@@ -24,3 +24,5 @@ jobs:
         with:
           # 👇 Chromatic projectToken, refer to the manage page to obtain it.
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          # 👇 Build script (defaults to build-storybook)
+          buildScriptName: storybook:build
