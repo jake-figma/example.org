@@ -1,14 +1,5 @@
-const SNIPPETS = snippets();
-const PARAMS = {
-  "@state": "default",
-  "@iconEnd": "IconArrowRight",
-  "@iconStart": "undefined",
-  "@variant": "primary",
-  "@label": "Hello world!",
-};
-
 figma.codegen.on("generate", (event) => {
-  return new Promise((resolve) => {
+  return new Promise(async (resolve) => {
     if (!["COMPONENT", "COMPONENT_SET", "INSTANCE"].includes(event.node.type)) {
       return resolve([
         {
@@ -18,9 +9,16 @@ figma.codegen.on("generate", (event) => {
         },
       ]);
     }
-    const snippet = SNIPPETS[event.node.name];
+    const SNIPPETS = snippets();
+    const rawName =
+      event.node.parent.type === "COMPONENT_SET"
+        ? event.node.parent.name
+        : event.node.name;
+    const name = capitalizedNameFromName(rawName);
+    const snippet = SNIPPETS[name];
     if (snippet) {
-      resolve(blocks(snippet, PARAMS, event.node.name));
+      const params = await paramsFromNode(event.node);
+      resolve(blocks(snippet, params, name));
     } else {
       resolve([
         {
@@ -32,6 +30,108 @@ figma.codegen.on("generate", (event) => {
     }
   });
 });
+
+async function paramsFromNode(node) {
+  const nodeToProcess =
+    node.type === "COMPONENT"
+      ? node.parent.type === "COMPONENT_SET"
+        ? node.parent
+        : node
+      : node;
+  const valueObject =
+    nodeToProcess.type === "INSTANCE"
+      ? nodeToProcess.componentProperties
+      : nodeToProcess.componentPropertyDefinitions;
+  const valueKey = nodeToProcess.type === "INSTANCE" ? "value" : "defaultValue";
+  const object = {};
+  for (let propertyName in valueObject) {
+    const value = valueObject[propertyName][valueKey];
+    const type = valueObject[propertyName].type;
+    const cleanName = sanitizePropertyName(propertyName);
+    object[cleanName] = object[cleanName] || {};
+    object[cleanName][type] =
+      type === "INSTANCE_SWAP"
+        ? capitalizedNameFromName(await figma.getNodeById(value).name)
+        : value;
+  }
+  const params = {};
+  const types = ["TEXT", "VARIANT", "INSTANCE_SWAP"];
+  for (let key in object) {
+    const item = object[key];
+    const hasBoolean = "BOOLEAN" in item;
+    const booleanCheck = !hasBoolean || item.BOOLEAN;
+    let value;
+    types.forEach((type) => {
+      if (type in item) {
+        if (booleanCheck) {
+          value =
+            type === "VARIANT" ? optionNameFromVariant(item[type]) : item[type];
+        } else {
+          value = "undefined";
+        }
+      }
+    });
+    if (value === undefined && hasBoolean) {
+      value = item.BOOLEAN;
+    }
+    params[`@${key}`] = value;
+  }
+  return params;
+}
+
+function capitalizedNameFromName(name) {
+  name = numericGuard(name);
+  return name
+    .split(/[^a-zA-Z\d]+/g)
+    .map(capitalize)
+    .join("");
+}
+
+function optionNameFromVariant(name) {
+  const clean = name.replace(/[^a-zA-Z\d-_ ]/g, "");
+  if (clean.match("-")) {
+    return clean.replace(/ +/g, "-").toLowerCase();
+  } else if (clean.match("_")) {
+    return clean.replace(/ +/g, "_").toLowerCase();
+  } else if (clean.match(" ") || clean.match(/^[A-Z]/)) {
+    return clean
+      .split(/ +/)
+      .map((a, i) => {
+        let text =
+          i > 0
+            ? `${a.charAt(0).toUpperCase()}${a.substring(1).toLowerCase()}`
+            : a.toLowerCase();
+        return text;
+      })
+      .join("");
+  } else return clean;
+}
+
+function capitalize(name) {
+  return `${name.charAt(0).toUpperCase()}${name.slice(1)}`;
+}
+
+function downcase(name) {
+  return `${name.charAt(0).toLowerCase()}${name.slice(1)}`;
+}
+function numericGuard(name) {
+  if (name.charAt(0).match(/\d/)) {
+    name = `N${name}`;
+  }
+  return name;
+}
+function capitalizedNameFromName(name) {
+  name = numericGuard(name);
+  return name
+    .split(/[^a-zA-Z\d]+/g)
+    .map(capitalize)
+    .join("");
+}
+
+function sanitizePropertyName(name) {
+  name = name.replace(/#[^#]+$/g, "");
+  return downcase(capitalizedNameFromName(name).replace(/^\d+/g, ""));
+}
 
 function blocks({ tag, children, computed, props, propTypes }, params, name) {
   for (let p in params) {
