@@ -1,7 +1,7 @@
 {
   "@semantic_color": {
     "$extensions": {
-      "org.twigma": {
+      "org.example": {
         "modes": ["day", "night"]
       }
     },
@@ -10,7 +10,7 @@
         "$type": "color",
         "$value": "{@primitive_color_color.mono-500}",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "{@primitive_color_color.mono-500}",
               "night": "{@primitive_color_color.mono-100}"
@@ -22,7 +22,7 @@
         "$type": "color",
         "$value": "rgba(0, 0, 0, 0.7000)",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "rgba(0, 0, 0, 0.7000)",
               "night": "rgba(0, 0, 0, 0.7000)"
@@ -34,7 +34,7 @@
         "$type": "color",
         "$value": "{@primitive_color_color.green-400}",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "{@primitive_color_color.green-400}",
               "night": "{@primitive_color_color.green-200}"
@@ -46,7 +46,7 @@
         "$type": "color",
         "$value": "{@primitive_color_color.mono-300}",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "{@primitive_color_color.mono-300}",
               "night": "{@primitive_color_color.mono-300}"
@@ -58,7 +58,7 @@
         "$type": "color",
         "$value": "{@primitive_color_color.mono-300}",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "{@primitive_color_color.mono-300}",
               "night": "{@primitive_color_color.mono-400}"
@@ -70,7 +70,7 @@
         "$type": "color",
         "$value": "{@primitive_color_color.purple-500}",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "{@primitive_color_color.purple-500}",
               "night": "{@primitive_color_color.purple-300}"
@@ -82,7 +82,7 @@
         "$type": "color",
         "$value": "{@primitive_color_color.mono-300}",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "{@primitive_color_color.mono-300}",
               "night": "{@primitive_color_color.mono-300}"
@@ -94,7 +94,7 @@
         "$type": "color",
         "$value": "{@primitive_color_color.mono-500}",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "{@primitive_color_color.mono-500}",
               "night": "{@primitive_color_color.mono-100}"
@@ -106,7 +106,7 @@
         "$type": "color",
         "$value": "{@primitive_color_color.yellow-100}",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "{@primitive_color_color.yellow-100}",
               "night": "{@primitive_color_color.yellow-500}"
@@ -118,7 +118,7 @@
         "$type": "color",
         "$value": "{@primitive_color_color.mono-100}",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "{@primitive_color_color.mono-100}",
               "night": "{@primitive_color_color.mono-500}"
@@ -130,7 +130,7 @@
         "$type": "color",
         "$value": "{@primitive_color_color.red-500}",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "{@primitive_color_color.red-500}",
               "night": "{@primitive_color_color.red-100}"
@@ -142,7 +142,7 @@
         "$type": "color",
         "$value": "{@primitive_color_color.mono-100}",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "{@primitive_color_color.mono-100}",
               "night": "{@primitive_color_color.mono-500}"
@@ -154,7 +154,7 @@
         "$type": "color",
         "$value": "{@primitive_color_color.blue-400}",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "{@primitive_color_color.blue-400}",
               "night": "{@primitive_color_color.blue-200}"
@@ -166,7 +166,7 @@
         "$type": "color",
         "$value": "{@primitive_color_color.purple-300}",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "{@primitive_color_color.purple-300}",
               "night": "{@primitive_color_color.purple-100}"
@@ -178,7 +178,7 @@
         "$type": "color",
         "$value": "{@primitive_color_color.green-300}",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "{@primitive_color_color.green-300}",
               "night": "{@primitive_color_color.green-500}"
@@ -190,7 +190,7 @@
         "$type": "color",
         "$value": "{@primitive_color_color.mono-500}",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "{@primitive_color_color.mono-500}",
               "night": "{@primitive_color_color.mono-100}"
@@ -202,7 +202,7 @@
         "$type": "color",
         "$value": "{@primitive_color_color.blue-300}",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "{@primitive_color_color.blue-300}",
               "night": "{@primitive_color_color.blue-100}"
@@ -214,7 +214,7 @@
         "$type": "color",
         "$value": "{@primitive_color_color.green-200}",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "{@primitive_color_color.green-200}",
               "night": "{@primitive_color_color.green-500}"
@@ -226,7 +226,7 @@
         "$type": "color",
         "$value": "{@primitive_color_color.mono-300}",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "{@primitive_color_color.mono-300}",
               "night": "{@primitive_color_color.mono-300}"
@@ -238,7 +238,7 @@
         "$type": "color",
         "$value": "{@primitive_color_color.blue-300}",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "{@primitive_color_color.blue-300}",
               "night": "{@primitive_color_color.blue-400}"
@@ -250,7 +250,7 @@
         "$type": "color",
         "$value": "{@primitive_color_color.mono-100}",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "{@primitive_color_color.mono-100}",
               "night": "{@primitive_color_color.mono-500}"
@@ -262,7 +262,7 @@
         "$type": "color",
         "$value": "{@primitive_color_color.purple-400}",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "{@primitive_color_color.purple-400}",
               "night": "{@primitive_color_color.purple-200}"
@@ -274,7 +274,7 @@
         "$type": "color",
         "$value": "{@primitive_color_color.blue-400}",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "{@primitive_color_color.blue-400}",
               "night": "{@primitive_color_color.blue-200}"
@@ -286,7 +286,7 @@
         "$type": "color",
         "$value": "{@primitive_color_color.blue-500}",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "{@primitive_color_color.blue-500}",
               "night": "{@primitive_color_color.blue-300}"
@@ -298,7 +298,7 @@
         "$type": "color",
         "$value": "{@primitive_color_color.blue-400}",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "{@primitive_color_color.blue-400}",
               "night": "{@primitive_color_color.blue-200}"
@@ -310,7 +310,7 @@
         "$type": "color",
         "$value": "{@primitive_color_color.mono-500}",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "{@primitive_color_color.mono-500}",
               "night": "{@primitive_color_color.mono-100}"
@@ -322,7 +322,7 @@
         "$type": "color",
         "$value": "{@primitive_color_color.green-100}",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "{@primitive_color_color.green-100}",
               "night": "{@primitive_color_color.green-400}"
@@ -334,7 +334,7 @@
         "$type": "color",
         "$value": "{@primitive_color_color.blue-400}",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "{@primitive_color_color.blue-400}",
               "night": "{@primitive_color_color.blue-200}"
@@ -346,7 +346,7 @@
         "$type": "color",
         "$value": "{@primitive_color_color.red-100}",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "{@primitive_color_color.red-100}",
               "night": "{@primitive_color_color.red-500}"
@@ -358,7 +358,7 @@
         "$type": "color",
         "$value": "{@primitive_color_color.red-400}",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "{@primitive_color_color.red-400}",
               "night": "{@primitive_color_color.red-200}"
@@ -370,7 +370,7 @@
         "$type": "color",
         "$value": "{@primitive_color_color.mono-200}",
         "$extensions": {
-          "org.twigma": {
+          "org.example": {
             "modes": {
               "day": "{@primitive_color_color.mono-200}",
               "night": "{@primitive_color_color.mono-400}"

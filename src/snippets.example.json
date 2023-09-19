@@ -1,0 +1,53 @@
+{
+  "Button": {
+    "tag": "Button",
+    "children": "@label",
+    "computed": {
+      "disabled": "@state=disabled?true:undefined",
+      "iconEnd": "<@iconEnd />",
+      "iconStart": "<@iconStart />",
+      "variant": "@variant"
+    },
+    "props": {
+      "Required": {
+        "disabled": "@",
+        "iconEnd": "@",
+        "iconStart": "@",
+        "onClick": "() => {}",
+        "variant": "@"
+      },
+      "All": {
+        "ariaLabel": "Only when label is not descriptive of the action",
+        "component": "button",
+        "disabled": "@",
+        "iconEnd": "@",
+        "iconStart": "@",
+        "onClick": "() => {}",
+        "type": "button",
+        "variant": "@"
+      },
+      "Component/Type Permutations": [
+        {
+          "component": "button",
+          "onClick": "() => {}",
+          "type": "button"
+        },
+        {
+          "component": "button",
+          "type": "submit"
+        },
+        {
+          "component": "a",
+          "href": "https://www.example.org"
+        }
+      ]
+    },
+    "propTypes": {
+      "*": "string",
+      "disabled": "boolean",
+      "iconEnd": "node",
+      "iconStart": "node",
+      "onClick": "function"
+    }
+  }
+}

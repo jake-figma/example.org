@@ -1,6 +1,0 @@
-{
-  "Button": {
-    "default": "// ./src/ui/Button/button.snippet.json\n<Button\n  ariaLabel=\"Only when label is not descriptive of the action\" // optional\n  component=\"button\"\n  type=\"button\"\n  onClick={() => alert(\"Required click event\")}\n  disabled={true} // optional\n  iconEnd={<@iconEnd />} // optional\n  iconStart={<@iconStart />} // optional\n  variant=\"@variant\"\n>\n  @label\n</Button>",
-    "permutations": "<Button\n  ariaLabel=\"Only when label is not descriptive of the action\" // optional\n  component=\"a\"\n    href=\"https://www.example.org\"\n    onClick={() => alert(\"Optional click event\")} // optional\n  component=\"button\"\n    type=\"button\"\n      onClick={() => alert(\"Required click event\")}\n    type=\"submit\"\n      onClick={() => alert(\"Optional click event\")} // optional\n  disabled={true} // optional\n  iconEnd={<@iconEnd />} // optional\n  iconStart={<@iconStart />} // optional\n  variant=\"@variant\"\n>\n  @label\n</Button>"
-  }
-}

@@ -1,38 +1,41 @@
 {
   "tag": "Button",
   "children": "@label",
-  "props": {
-    "ariaLabel?": "\"Only when label is not descriptive of the action\"",
-    "component": {
-      "button": {
-        "type": {
-          "button": {
-            "onClick": "() => alert(\"Required click event\")"
-          }
-        }
-      }
-    },
-    "disabled?": "true",
-    "iconEnd?": "<@iconEnd />",
-    "iconStart?": "<@iconStart />",
-    "variant": "\"@variant\""
+  "computed": {
+    "disabled": "@state=disabled?true:undefined",
+    "iconEnd": "<@iconEnd />",
+    "iconStart": "<@iconStart />",
+    "variant": "@variant"
   },
-  "permutations": {
-    "component": {
-      "a": {
-        "href": "\"https://www.example.org\"",
-        "onClick?": "() => alert(\"Optional click event\")"
-      },
-      "button": {
-        "type": {
-          "button": {
-            "onClick": "() => alert(\"Required click event\")"
-          },
-          "submit": {
-            "onClick?": "() => alert(\"Optional click event\")"
-          }
-        }
-      }
-    }
+  "props": {
+    "Required": {
+      "disabled": "@",
+      "iconEnd": "@",
+      "iconStart": "@",
+      "onClick": "() => {}",
+      "variant": "@"
+    },
+    "All": {
+      "ariaLabel": "Only when label is not descriptive of the action",
+      "component": "button",
+      "disabled": "@",
+      "iconEnd": "@",
+      "iconStart": "@",
+      "onClick": "() => {}",
+      "type": "button",
+      "variant": "@"
+    },
+    "Component/Type Permutations": [
+      { "component": "button", "onClick": "() => {}", "type": "button" },
+      { "component": "button", "type": "submit" },
+      { "component": "a", "href": "https://www.example.org" }
+    ]
+  },
+  "propTypes": {
+    "*": "string",
+    "disabled": "boolean",
+    "iconEnd": "node",
+    "iconStart": "node",
+    "onClick": "function"
   }
 }
