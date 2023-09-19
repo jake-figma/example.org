@@ -9,6 +9,6 @@ const snippets = SNIPPETS.reduce((into, path) => {
 }, {});
 
 fs.writeFileSync(
-  "./src/snippets.example.json",
+  "./scripts/snippets.example.json",
   JSON.stringify(snippets, null, 2)
 );

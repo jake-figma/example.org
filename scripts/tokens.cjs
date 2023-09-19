@@ -4,7 +4,7 @@ const NAMESPACE = "org.example";
 const JOIN_CHAR = "_";
 const SEMANTIC_MODES = { light: "day", dark: "night" };
 
-const data = JSON.parse(fs.readFileSync("./src/tokens.example.json"));
+const data = JSON.parse(fs.readFileSync("./scripts/tokens.example.json"));
 
 const processed = {
   color: { primitive: {}, semantic: {} },
