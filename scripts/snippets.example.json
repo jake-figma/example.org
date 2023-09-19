@@ -49,5 +49,53 @@
       "iconStart": "node",
       "onClick": "function"
     }
+  },
+  "IconButton": {
+    "tag": "IconButton",
+    "children": "@label",
+    "computed": {
+      "disabled": "@state=disabled?true:undefined",
+      "icon": "<@icon />",
+      "variant": "@variant"
+    },
+    "props": {
+      "Required": {
+        "ariaLabel": "Describe the action",
+        "disabled": "@",
+        "icon": "@",
+        "onClick": "() => {}",
+        "variant": "@"
+      },
+      "All": {
+        "ariaLabel": "Describe the action",
+        "component": "button",
+        "disabled": "@",
+        "icon": "@",
+        "onClick": "() => {}",
+        "type": "button",
+        "variant": "@"
+      },
+      "Component/Type Permutations": [
+        {
+          "component": "button",
+          "onClick": "() => {}",
+          "type": "button"
+        },
+        {
+          "component": "button",
+          "type": "submit"
+        },
+        {
+          "component": "a",
+          "href": "https://www.example.org"
+        }
+      ]
+    },
+    "propTypes": {
+      "*": "string",
+      "disabled": "boolean",
+      "icon": "node",
+      "onClick": "function"
+    }
   }
 }

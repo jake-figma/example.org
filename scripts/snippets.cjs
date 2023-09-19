@@ -1,9 +1,13 @@
 const fs = require("fs");
 
-const SNIPPETS = ["./src/ui/Button/button.snippet.json"];
+const SNIPPET_ROOT = "./src/ui/";
+const SNIPPETS = [
+  "Button/Button.snippet.json",
+  "Button/IconButton.snippet.json",
+];
 
 const snippets = SNIPPETS.reduce((into, path) => {
-  const json = JSON.parse(fs.readFileSync(path));
+  const json = JSON.parse(fs.readFileSync(SNIPPET_ROOT + path));
   into[json.tag] = { ...json };
   return into;
 }, {});

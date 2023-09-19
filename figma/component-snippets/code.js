@@ -134,8 +134,10 @@ function sanitizePropertyName(name) {
 }
 
 function blocks({ tag, children, computed, props, propTypes }, params, name) {
-  for (let p in params) {
-    children = children.replace(new RegExp(p, "g"), params[p]);
+  if (children) {
+    for (let p in params) {
+      children = children.replace(new RegExp(p, "g"), params[p]);
+    }
   }
 
   const result = [];
@@ -251,6 +253,53 @@ function snippets() {
         disabled: "boolean",
         iconEnd: "node",
         iconStart: "node",
+        onClick: "function",
+      },
+    },
+    IconButton: {
+      tag: "IconButton",
+      computed: {
+        disabled: "@state=disabled?true:undefined",
+        icon: "<@icon />",
+        variant: "@variant",
+      },
+      props: {
+        Required: {
+          ariaLabel: "Describe the action",
+          disabled: "@",
+          icon: "@",
+          onClick: "() => {}",
+          variant: "@",
+        },
+        All: {
+          ariaLabel: "Describe the action",
+          component: "button",
+          disabled: "@",
+          icon: "@",
+          onClick: "() => {}",
+          type: "button",
+          variant: "@",
+        },
+        "Component/Type Permutations": [
+          {
+            component: "button",
+            onClick: "() => {}",
+            type: "button",
+          },
+          {
+            component: "button",
+            type: "submit",
+          },
+          {
+            component: "a",
+            href: "https://www.example.org",
+          },
+        ],
+      },
+      propTypes: {
+        "*": "string",
+        disabled: "boolean",
+        icon: "node",
         onClick: "function",
       },
     },
