@@ -133,7 +133,11 @@ function sanitizePropertyName(name) {
   return downcase(capitalizedNameFromName(name).replace(/^\d+/g, ""));
 }
 
-function blocks({ tag, children, computed, props, propTypes }, params, name) {
+function blocks(
+  { name: tagName, children, computed, props, propTypes },
+  params,
+  name
+) {
   if (children) {
     for (let p in params) {
       children = children.replace(new RegExp(p, "g"), params[p]);
@@ -164,17 +168,17 @@ function blocks({ tag, children, computed, props, propTypes }, params, name) {
           arr.push("\n");
         }
         arr.push(
-          `<${tag}`,
+          `<${tagName}`,
           ...renderProps(object, propTypes, computed),
-          children ? `>\n  ${children}\n</${tag}>` : "/>"
+          children ? `>\n  ${children}\n</${tagName}>` : "/>"
         );
       });
       code = arr.join("\n");
     } else {
       code = [
-        `<${tag}`,
+        `<${tagName}`,
         ...renderProps(props[title], propTypes, computed),
-        children ? `>\n  ${children}\n</${tag}>` : "/>",
+        children ? `>\n  ${children}\n</${tagName}>` : "/>",
       ].join("\n");
     }
     result.push({
@@ -206,7 +210,7 @@ function renderProps(props, propTypes, computed) {
 function snippets() {
   return {
     Button: {
-      tag: "Button",
+      name: "Button",
       children: "@label",
       computed: {
         disabled: "@state=disabled?true:undefined",
@@ -257,7 +261,7 @@ function snippets() {
       },
     },
     IconButton: {
-      tag: "IconButton",
+      name: "IconButton",
       computed: {
         disabled: "@state=disabled?true:undefined",
         icon: "<@icon />",

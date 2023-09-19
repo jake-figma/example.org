@@ -11,8 +11,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic",
-    "script:snippets": "node scripts/snippets.cjs",
-    "script:tokens": "node scripts/tokens.cjs"
+    "script:snippets": "node scripts/snippets/snippets.cjs",
+    "script:tokens": "node scripts/tokens/tokens.cjs"
   },
   "dependencies": {
     "react": "^18.2.0",

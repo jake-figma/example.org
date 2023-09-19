@@ -1,5 +1,5 @@
 {
-  "tag": "IconButton",
+  "name": "IconButton",
   "children": "@label",
   "computed": {
     "disabled": "@state=disabled?true:undefined",
