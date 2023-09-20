@@ -1,311 +1,298 @@
-figma.codegen.on("generate", (event) => {
-  return new Promise(async (resolve) => {
-    if (!["COMPONENT", "COMPONENT_SET", "INSTANCE"].includes(event.node.type)) {
-      return resolve([
-        {
-          language: "PLAINTEXT",
-          code: "Select a component",
-          title: `Component Snippets`,
-        },
-      ]);
-    }
-    const SNIPPETS = snippets();
-    const rawName =
-      event.node.parent.type === "COMPONENT_SET"
-        ? event.node.parent.name
-        : event.node.name;
-    const name = capitalizedNameFromName(rawName);
-    const snippet = SNIPPETS[name];
-    if (snippet) {
-      const params = await paramsFromNode(event.node);
-      resolve(blocks(snippet, params, name));
-    } else {
-      resolve([
-        {
-          language: "PLAINTEXT",
-          code: "No snippets found",
-          title: `Component Snippets`,
-        },
-      ]);
-    }
+"use strict";
+(() => {
+  var __defProp = Object.defineProperty;
+  var __export = (target, all) => {
+    for (var name in all)
+      __defProp(target, name, { get: all[name], enumerable: true });
+  };
+
+  // ../../scripts/snippets/snippets.example.json
+  var snippets_example_exports = {};
+  __export(snippets_example_exports, {
+    Button: () => Button,
+    IconButton: () => IconButton,
+    default: () => snippets_example_default
   });
-});
-
-async function paramsFromNode(node) {
-  const nodeToProcess =
-    node.type === "COMPONENT"
-      ? node.parent.type === "COMPONENT_SET"
-        ? node.parent
-        : node
-      : node;
-  const valueObject =
-    nodeToProcess.type === "INSTANCE"
-      ? nodeToProcess.componentProperties
-      : nodeToProcess.componentPropertyDefinitions;
-  const valueKey = nodeToProcess.type === "INSTANCE" ? "value" : "defaultValue";
-  const object = {};
-  for (let propertyName in valueObject) {
-    const value = valueObject[propertyName][valueKey];
-    const type = valueObject[propertyName].type;
-    const cleanName = sanitizePropertyName(propertyName);
-    object[cleanName] = object[cleanName] || {};
-    object[cleanName][type] =
-      type === "INSTANCE_SWAP"
-        ? capitalizedNameFromName(await figma.getNodeById(value).name)
-        : value;
-  }
-  const params = {};
-  const types = ["TEXT", "VARIANT", "INSTANCE_SWAP"];
-  for (let key in object) {
-    const item = object[key];
-    const hasBoolean = "BOOLEAN" in item;
-    const booleanCheck = !hasBoolean || item.BOOLEAN;
-    let value;
-    types.forEach((type) => {
-      if (type in item) {
-        if (booleanCheck) {
-          value =
-            type === "VARIANT" ? optionNameFromVariant(item[type]) : item[type];
-        } else {
-          value = "undefined";
-        }
-      }
-    });
-    if (value === undefined && hasBoolean) {
-      value = item.BOOLEAN;
-    }
-    params[`@${key}`] = value;
-  }
-  return params;
-}
-
-function capitalizedNameFromName(name) {
-  name = numericGuard(name);
-  return name
-    .split(/[^a-zA-Z\d]+/g)
-    .map(capitalize)
-    .join("");
-}
-
-function optionNameFromVariant(name) {
-  const clean = name.replace(/[^a-zA-Z\d-_ ]/g, "");
-  if (clean.match("-")) {
-    return clean.replace(/ +/g, "-").toLowerCase();
-  } else if (clean.match("_")) {
-    return clean.replace(/ +/g, "_").toLowerCase();
-  } else if (clean.match(" ") || clean.match(/^[A-Z]/)) {
-    return clean
-      .split(/ +/)
-      .map((a, i) => {
-        let text =
-          i > 0
-            ? `${a.charAt(0).toUpperCase()}${a.substring(1).toLowerCase()}`
-            : a.toLowerCase();
-        return text;
-      })
-      .join("");
-  } else return clean;
-}
-
-function capitalize(name) {
-  return `${name.charAt(0).toUpperCase()}${name.slice(1)}`;
-}
-
-function downcase(name) {
-  return `${name.charAt(0).toLowerCase()}${name.slice(1)}`;
-}
-function numericGuard(name) {
-  if (name.charAt(0).match(/\d/)) {
-    name = `N${name}`;
-  }
-  return name;
-}
-function capitalizedNameFromName(name) {
-  name = numericGuard(name);
-  return name
-    .split(/[^a-zA-Z\d]+/g)
-    .map(capitalize)
-    .join("");
-}
-
-function sanitizePropertyName(name) {
-  name = name.replace(/#[^#]+$/g, "");
-  return downcase(capitalizedNameFromName(name).replace(/^\d+/g, ""));
-}
-
-function blocks(
-  { name: tagName, children, computed, props, propTypes },
-  params,
-  name
-) {
-  if (children) {
-    for (let p in params) {
-      children = children.replace(new RegExp(p, "g"), params[p]);
-    }
-  }
-
-  const result = [];
-  for (let prop in computed) {
-    for (let p in params) {
-      computed[prop] =
-        computed[prop].match(p) && params[p] === "undefined"
-          ? "undefined"
-          : computed[prop].replace(new RegExp(p, "g"), params[p]);
-    }
-    const ternary = computed[prop].match(/^(.+)=(.+)\?(.+):(.+)$/);
-    if (ternary) {
-      const [_, param, value, truthy, falsey] = ternary;
-      computed[prop] = param === value ? truthy : falsey;
-    }
-  }
-
-  for (let title in props) {
-    let code = "";
-    if (Array.isArray(props[title])) {
-      const arr = [];
-      props[title].forEach((object, i) => {
-        if (i > 0) {
-          arr.push("\n");
-        }
-        arr.push(
-          `<${tagName}`,
-          ...renderProps(object, propTypes, computed),
-          children ? `>\n  ${children}\n</${tagName}>` : "/>"
-        );
-      });
-      code = arr.join("\n");
-    } else {
-      code = [
-        `<${tagName}`,
-        ...renderProps(props[title], propTypes, computed),
-        children ? `>\n  ${children}\n</${tagName}>` : "/>",
-      ].join("\n");
-    }
-    result.push({
-      language: "JAVASCRIPT",
-      code,
-      title: `${name}: ${title}`,
-    });
-  }
-
-  return result;
-}
-
-function renderProps(props, propTypes, computed) {
-  const propsArr = [];
-  for (let propName in props) {
-    const type = propTypes[propName] || propTypes["*"] || "string";
-    const rawValue = props[propName];
-    if (computed[propName] !== "undefined") {
-      const value =
-        rawValue === "@" ? computed[propName] || rawValue : rawValue;
-      propsArr.push(
-        `  ${propName}=` + (type === "string" ? `"${value}"` : `{${value}}`)
-      );
-    }
-  }
-  return propsArr;
-}
-
-function snippets() {
-  return {
-    Button: {
-      name: "Button",
-      children: "@label",
-      computed: {
+  var Button = {
+    name: "Button",
+    props: {
+      Required: {
+        children: "@label",
         disabled: "@state=disabled?true:undefined",
         iconEnd: "<@iconEnd />",
         iconStart: "<@iconStart />",
-        variant: "@variant",
+        onClick: "() => {}",
+        variant: "@variant"
       },
-      props: {
-        Required: {
-          disabled: "@",
-          iconEnd: "@",
-          iconStart: "@",
-          onClick: "() => {}",
-          variant: "@",
-        },
-        All: {
-          ariaLabel: "Only when label is not descriptive of the action",
+      All: {
+        ariaLabel: "Only when label is not descriptive of the action",
+        children: "@label",
+        component: "button",
+        disabled: "@state=disabled?true:undefined",
+        iconEnd: "<@iconEnd />",
+        iconStart: "<@iconStart />",
+        onClick: "() => {}",
+        type: "button",
+        variant: "@variant"
+      },
+      "Component/Type Permutations": [
+        {
           component: "button",
-          disabled: "@",
-          iconEnd: "@",
-          iconStart: "@",
-          onClick: "() => {}",
           type: "button",
-          variant: "@",
+          onClick: "() => {}"
         },
-        "Component/Type Permutations": [
-          {
-            component: "button",
-            onClick: "() => {}",
-            type: "button",
-          },
-          {
-            component: "button",
-            type: "submit",
-          },
-          {
-            component: "a",
-            href: "https://www.example.org",
-          },
-        ],
-      },
-      propTypes: {
-        "*": "string",
-        disabled: "boolean",
-        iconEnd: "node",
-        iconStart: "node",
-        onClick: "function",
-      },
+        {
+          component: "button",
+          type: "submit"
+        },
+        {
+          component: "a",
+          href: "https://www.example.org"
+        }
+      ]
     },
-    IconButton: {
-      name: "IconButton",
-      computed: {
+    propTypes: {
+      "*": "string",
+      disabled: "boolean",
+      iconEnd: "node",
+      iconStart: "node",
+      onClick: "function"
+    }
+  };
+  var IconButton = {
+    name: "IconButton",
+    props: {
+      Required: {
+        ariaLabel: "Describe the action",
         disabled: "@state=disabled?true:undefined",
         icon: "<@icon />",
-        variant: "@variant",
+        onClick: "() => {}",
+        variant: "@variant"
       },
-      props: {
-        Required: {
-          ariaLabel: "Describe the action",
-          disabled: "@",
-          icon: "@",
-          onClick: "() => {}",
-          variant: "@",
-        },
-        All: {
-          ariaLabel: "Describe the action",
+      All: {
+        ariaLabel: "Describe the action",
+        component: "button",
+        disabled: "@state=disabled?true:undefined",
+        icon: "<@icon />",
+        onClick: "() => {}",
+        type: "button",
+        variant: "@variant"
+      },
+      "Component/Type Permutations": [
+        {
           component: "button",
-          disabled: "@",
-          icon: "@",
-          onClick: "() => {}",
           type: "button",
-          variant: "@",
+          onClick: "() => {}"
         },
-        "Component/Type Permutations": [
-          {
-            component: "button",
-            onClick: "() => {}",
-            type: "button",
-          },
-          {
-            component: "button",
-            type: "submit",
-          },
-          {
-            component: "a",
-            href: "https://www.example.org",
-          },
-        ],
-      },
-      propTypes: {
-        "*": "string",
-        disabled: "boolean",
-        icon: "node",
-        onClick: "function",
-      },
+        {
+          component: "button",
+          type: "submit"
+        },
+        {
+          component: "a",
+          href: "https://www.example.org"
+        }
+      ]
     },
+    propTypes: {
+      "*": "string",
+      disabled: "boolean",
+      icon: "node",
+      onClick: "function"
+    }
   };
-}
+  var snippets_example_default = {
+    Button,
+    IconButton
+  };
+
+  // code.ts
+  figma.codegen.on("generate", (event) => {
+    return new Promise(async (resolve) => {
+      const node = event.node;
+      if (!isComponentNode(node)) {
+        return resolve([
+          {
+            language: "PLAINTEXT",
+            code: "Select a component",
+            title: `Component Snippets`
+          }
+        ]);
+      }
+      const snippets = getSnippets();
+      const rawName = node.parent && node.parent.type === "COMPONENT_SET" ? node.parent.name : node.name;
+      const name = capitalizedNameFromName(rawName);
+      const snippet = snippets[name];
+      if (snippet) {
+        const params = await paramsFromNode(node);
+        resolve(codegenResult(snippet, params, name));
+      } else {
+        resolve([
+          {
+            language: "PLAINTEXT",
+            code: "No snippets found",
+            title: `Component Snippets`
+          }
+        ]);
+      }
+    });
+  });
+  async function paramsFromNode(node) {
+    const nodeToProcess = node.type === "COMPONENT" ? node.parent && node.parent.type === "COMPONENT_SET" ? node.parent : node : node;
+    const valueObject = nodeToProcess.type === "INSTANCE" ? nodeToProcess.componentProperties : nodeToProcess.componentPropertyDefinitions;
+    const object = {};
+    const isDefinitions = isComponentPropertyDefinitions(valueObject);
+    for (let propertyName in valueObject) {
+      const value = isDefinitions ? valueObject[propertyName].defaultValue : valueObject[propertyName].value;
+      const type = valueObject[propertyName].type;
+      const cleanName = sanitizePropertyName(propertyName);
+      if (value !== void 0) {
+        object[cleanName] = object[cleanName] || {};
+        if (isString(value)) {
+          if (type === "VARIANT")
+            object[cleanName].VARIANT = value;
+          if (type === "TEXT")
+            object[cleanName].TEXT = value;
+          if (type === "INSTANCE_SWAP") {
+            const foundNode = await figma.getNodeById(value);
+            object[cleanName].INSTANCE_SWAP = capitalizedNameFromName(
+              foundNode ? foundNode.name : ""
+            );
+          }
+        } else {
+          object[cleanName].BOOLEAN = value;
+        }
+      }
+    }
+    const params = {};
+    const types = ["TEXT", "VARIANT", "INSTANCE_SWAP"];
+    for (let key in object) {
+      const item = object[key];
+      const hasBoolean = "BOOLEAN" in item;
+      const booleanCheck = !hasBoolean || item.BOOLEAN;
+      let value;
+      types.forEach((type) => {
+        if (type in item) {
+          if (booleanCheck) {
+            value = type === "VARIANT" ? optionNameFromVariant(item[type]) : item[type];
+          } else {
+            value = "undefined";
+          }
+        }
+      });
+      if (value === void 0 && hasBoolean) {
+        value = item.BOOLEAN;
+      }
+      params[`@${key}`] = (value || "").toString() || "";
+    }
+    return params;
+  }
+  function optionNameFromVariant(name = "") {
+    const clean = name.replace(/[^a-zA-Z\d-_ ]/g, "");
+    if (clean.match("-")) {
+      return clean.replace(/ +/g, "-").toLowerCase();
+    } else if (clean.match("_")) {
+      return clean.replace(/ +/g, "_").toLowerCase();
+    } else if (clean.match(" ") || clean.match(/^[A-Z]/)) {
+      return clean.split(/ +/).map((a, i) => {
+        let text = i > 0 ? `${a.charAt(0).toUpperCase()}${a.substring(1).toLowerCase()}` : a.toLowerCase();
+        return text;
+      }).join("");
+    } else
+      return clean;
+  }
+  function codegenResult({ name: tagName, props, propTypes }, params, name) {
+    const result = [];
+    for (let title in props) {
+      let code = "";
+      const propObject = props[title];
+      if (Array.isArray(propObject)) {
+        const arr = [];
+        propObject.forEach((object) => {
+          const children = "children" in object ? formatValue(object.children, params) : null;
+          arr.push(formatInstance(tagName, object, propTypes, params, children));
+        });
+        code = arr.join("\n");
+      } else {
+        const children = "children" in propObject ? formatValue(propObject.children, params) : null;
+        code = formatInstance(tagName, propObject, propTypes, params, children);
+      }
+      result.push({
+        language: "JAVASCRIPT",
+        code,
+        title: `${name}: ${title}`
+      });
+    }
+    return result;
+  }
+  function formatValue(rawValue, params) {
+    let value = rawValue;
+    for (let p in params) {
+      value = value.match(p) && params[p] === "undefined" ? "undefined" : value.replace(new RegExp(p, "g"), params[p]);
+    }
+    const ternary = value.match(/^(.+)=(.+)\?(.+):(.+)$/);
+    if (ternary) {
+      const [_, param, val, truthy, falsey] = ternary;
+      value = param === val ? truthy : falsey;
+    }
+    return value !== "undefined" ? value : null;
+  }
+  function renderProps(props, propTypes, params) {
+    const propsArr = [];
+    for (let propName in props) {
+      if (propName !== "children") {
+        const type = propTypes[propName] || propTypes["*"] || "string";
+        const value = formatValue(props[propName], params);
+        if (value !== null) {
+          propsArr.push(
+            `  ${propName}=` + (type === "string" ? `"${value}"` : `{${value}}`)
+          );
+        }
+      }
+    }
+    return propsArr;
+  }
+  function isComponentPropertyDefinitions(object) {
+    const key = Object.keys(object)[0];
+    return "defaultValue" in object[key];
+  }
+  function isComponentNode(node) {
+    return node.type === "COMPONENT" || node.type === "COMPONENT_SET" || node.type === "INSTANCE";
+  }
+  function isString(value) {
+    return value.toString() === value;
+  }
+  function getSnippets() {
+    return JSON.parse(JSON.stringify(snippets_example_exports));
+  }
+  function capitalize(name) {
+    return `${name.charAt(0).toUpperCase()}${name.slice(1)}`;
+  }
+  function downcase(name) {
+    return `${name.charAt(0).toLowerCase()}${name.slice(1)}`;
+  }
+  function numericGuard(name) {
+    if (name.charAt(0).match(/\d/)) {
+      name = `N${name}`;
+    }
+    return name;
+  }
+  function capitalizedNameFromName(name) {
+    name = numericGuard(name);
+    return name.split(/[^a-zA-Z\d]+/g).map(capitalize).join("");
+  }
+  function sanitizePropertyName(name) {
+    name = name.replace(/#[^#]+$/g, "");
+    return downcase(capitalizedNameFromName(name).replace(/^\d+/g, ""));
+  }
+  function formatInstance(tagName, object, propTypes, params, children) {
+    const singleLine = Object.keys(object).length <= 3;
+    const array = [`<${tagName}`, ...renderProps(object, propTypes, params)];
+    if (children) {
+      array.push(">", `  ${children}`, `</${tagName}>`);
+    } else {
+      array.push("/>");
+    }
+    return array.join(singleLine ? " " : "\n");
+  }
+})();

@@ -1,32 +1,27 @@
 {
   "name": "Button",
-  "children": "@label",
-  "computed": {
-    "disabled": "@state=disabled?true:undefined",
-    "iconEnd": "<@iconEnd />",
-    "iconStart": "<@iconStart />",
-    "variant": "@variant"
-  },
   "props": {
     "Required": {
-      "disabled": "@",
-      "iconEnd": "@",
-      "iconStart": "@",
+      "children": "@label",
+      "disabled": "@state=disabled?true:undefined",
+      "iconEnd": "<@iconEnd />",
+      "iconStart": "<@iconStart />",
       "onClick": "() => {}",
-      "variant": "@"
+      "variant": "@variant"
     },
     "All": {
       "ariaLabel": "Only when label is not descriptive of the action",
+      "children": "@label",
       "component": "button",
-      "disabled": "@",
-      "iconEnd": "@",
-      "iconStart": "@",
+      "disabled": "@state=disabled?true:undefined",
+      "iconEnd": "<@iconEnd />",
+      "iconStart": "<@iconStart />",
       "onClick": "() => {}",
       "type": "button",
-      "variant": "@"
+      "variant": "@variant"
     },
     "Component/Type Permutations": [
-      { "component": "button", "onClick": "() => {}", "type": "button" },
+      { "component": "button", "type": "button", "onClick": "() => {}" },
       { "component": "button", "type": "submit" },
       { "component": "a", "href": "https://www.example.org" }
     ]

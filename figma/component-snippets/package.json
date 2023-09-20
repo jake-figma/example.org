@@ -1,0 +1,20 @@
+{
+  "name": "component-snippets",
+  "version": "1.0.0",
+  "description": "",
+  "main": "code.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc --noEmit -p .",
+    "build": "esbuild code.ts --bundle --outfile=code.js",
+    "dev": "concurrently -n tsc,build 'npm run tsc -- --preserveWatchOutput --watch' 'npm run build -- --watch'"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@figma/plugin-typings": "^1.77.0",
+    "concurrently": "^8.2.1",
+    "esbuild": "^0.19.3",
+    "typescript": "^5.2.2"
+  }
+}

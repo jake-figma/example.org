@@ -1,6 +1,6 @@
 # Snippets
 
-A way to represent a dynamic snippet for markup or components.
+A way to represent a dynamic snippet for markup or component usage.
 
 ## Markup
 
@@ -11,7 +11,7 @@ A way to represent a dynamic snippet for markup or components.
 }
 ```
 
-Where `params` is `{ text: "Hello world" }` yields:
+Given `params` of `{ text: "Hello world" }`, the snippet would be rendered as...
 
 ```html
 <h1>Hello world</h1>
@@ -21,25 +21,20 @@ Where `params` is `{ text: "Hello world" }` yields:
 
 Components think about properties and children instead of a literal template.
 
-Params are converted to values for properties in the `computed` definition. Computed values can be string templates or ternary conditional expressions. Here, we say the value of `disabled` is `true` if `params.state === "disabled"`, otherwise, it is `undefined`.
+Params are converted to values for properties. Values can be string templates or ternary conditional expressions. Here, we say the value of `disabled` is `true` if `params.state === "disabled"`, otherwise, it is `undefined`.
 
-The `propTypes` field is used to help indicate what kind of format should be used for the properties.
+The `propTypes` field is used to help indicate what kind of format should be used for the properties. A wildcard `"*"` can be used to describe the default type. These types are only used when formatting a snippet, so it is best kept to primitive-like values.
 
 ```json
 {
   "name": "SweetComponent",
-  "children": "@text",
-  "computed": {
-    "disabled": "@state=disabled?true:undefined",
-    "icon": "<@icon />",
-    "variant": "@variant"
-  },
   "props": {
     "Hello World": {
-      "disabled": "@",
-      "icon": "@",
+      "children": "@text",
+      "disabled": "@state=disabled?true:undefined",
+      "icon": "<@icon />",
       "onClick": "() => {}",
-      "variant": "@"
+      "variant": "@variant"
     }
   },
   "propTypes": {
@@ -51,16 +46,16 @@ The `propTypes` field is used to help indicate what kind of format should be use
 }
 ```
 
-Where `params` is:
+Given the following `params`...
 
 ```js
 { state: "disabled", icon: "IconHeart", variant: "primary", text: "Hello world" }
 ```
 
-yields:
+The snippet would be rendered as...
 
 ```jsx
 <SweetComponent disabled={true} icon={<IconHeart />} variant="primary">
-  Hello World
+  Hello world
 </SweetComponent>
 ```
