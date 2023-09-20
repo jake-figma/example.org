@@ -1,0 +1,10 @@
+{
+  "name": "Icon File Generator",
+  "id": "12341234123455",
+  "api": "1.0.0",
+  "editorType": ["dev"],
+  "capabilities": ["panel"],
+  "permissions": [],
+  "main": "code.js",
+  "networkAccess": { "allowedDomains": ["none"] }
+}

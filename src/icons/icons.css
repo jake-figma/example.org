@@ -1,0 +1,16 @@
+.icon {
+  --icon-fill: var(--color-icon-default);
+  display: block;
+}
+.icon-size-sm {
+  height: var(--sizes-md);
+  width: var(--sizes-md);
+}
+.icon-size-md {
+  height: var(--sizes-lg);
+  width: var(--sizes-lg);
+}
+.icon-size-lg {
+  height: var(--sizes-xl);
+  width: var(--sizes-xl);
+}

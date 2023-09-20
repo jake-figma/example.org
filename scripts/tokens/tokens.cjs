@@ -3,7 +3,6 @@ const fs = require("fs");
 const NAMESPACE = "org.example";
 const JOIN_CHAR = "_";
 const SEMANTIC_MODES = { light: "day", dark: "night" };
-const NAME_DEPTH = 1;
 
 const data = JSON.parse(
   fs.readFileSync("./scripts/tokens/tokens.example.json")

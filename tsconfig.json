@@ -17,6 +17,7 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": "./src",
     "paths": {
+      "icons": ["./icons"],
       "ui": ["./ui"]
     }
   },

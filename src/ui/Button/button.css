@@ -1,7 +1,7 @@
 .button-base {
   all: unset;
   background: var(--button-bg, var(--color-bg-brand));
-  border-radius: var(--size-24) var(--size-8);
+  border-radius: var(--size-24);
   color: var(--button-color, var(--color-text-contrast));
   cursor: pointer;
   display: inline-block;
@@ -9,6 +9,12 @@
   line-height: 2rem;
   padding: var(--size-8) var(--size-24);
   position: relative;
+}
+.button-base.button-base-icon-only {
+  padding: var(--size-8);
+}
+.button-base .icon {
+  --icon-fill: var(--button-color, var(--color-text-contrast));
 }
 .button-base:hover {
   --button-bg: var(--button-bg-hover, var(--color-bg-brand-hover));
