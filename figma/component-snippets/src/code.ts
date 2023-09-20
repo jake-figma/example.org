@@ -1,24 +1,12 @@
-import * as snippetsJSON from "../../scripts/snippets/snippets.example.json";
-
-type ParamsMap = {
-  [k: string]: {
-    TEXT?: string;
-    BOOLEAN?: boolean;
-    INSTANCE_SWAP?: string;
-    VARIANT?: string;
-  };
-};
-interface BasicObject {
-  [k: string]: string;
-}
-type ParamsValues = BasicObject;
-interface Snippet {
-  name: string;
-  props: {
-    [k: string]: BasicObject | BasicObject[];
-  };
-  propTypes: BasicObject;
-}
+import * as snippetsJSON from "../../../scripts/snippets/snippets.example.json";
+import { Snippet, ParamsMap, ParamsValues, BasicObject } from "./types";
+import {
+  capitalizedNameFromName,
+  isComponentNode,
+  isComponentPropertyDefinitions,
+  isString,
+  sanitizePropertyName,
+} from "./utils";
 
 figma.codegen.on("generate", (event) => {
   return new Promise(async (resolve) => {
@@ -32,7 +20,7 @@ figma.codegen.on("generate", (event) => {
         },
       ]);
     }
-    const snippets = getSnippets();
+    const snippets = JSON.parse(JSON.stringify(snippetsJSON));
     const rawName =
       node.parent && node.parent.type === "COMPONENT_SET"
         ? node.parent.name
@@ -53,6 +41,41 @@ figma.codegen.on("generate", (event) => {
     }
   });
 });
+
+function codegenResult(
+  { name: tagName, props, propTypes }: Snippet,
+  params: ParamsValues,
+  name: string
+): CodegenResult[] {
+  const result: CodegenResult[] = [];
+
+  for (let title in props) {
+    let code = "";
+    const propObject = props[title];
+    if (Array.isArray(propObject)) {
+      const arr: string[] = [];
+      propObject.forEach((object) => {
+        const children =
+          "children" in object ? formatValue(object.children, params) : null;
+        arr.push(formatInstance(tagName, object, propTypes, params, children));
+      });
+      code = arr.join("\n");
+    } else {
+      const children =
+        "children" in propObject
+          ? formatValue(propObject.children, params)
+          : null;
+      code = formatInstance(tagName, propObject, propTypes, params, children);
+    }
+    result.push({
+      language: "JAVASCRIPT",
+      code,
+      title: `${name}: ${title}`,
+    });
+  }
+
+  return result;
+}
 
 async function paramsFromNode(
   node: ComponentNode | ComponentSetNode | InstanceNode
@@ -113,62 +136,28 @@ async function paramsFromNode(
     }
     params[`@${key}`] = (value || "").toString() || "";
   }
-  return params;
-}
 
-function optionNameFromVariant(name: string = "") {
-  const clean = name.replace(/[^a-zA-Z\d-_ ]/g, "");
-  if (clean.match("-")) {
-    return clean.replace(/ +/g, "-").toLowerCase();
-  } else if (clean.match("_")) {
-    return clean.replace(/ +/g, "_").toLowerCase();
-  } else if (clean.match(" ") || clean.match(/^[A-Z]/)) {
-    return clean
-      .split(/ +/)
-      .map((a, i) => {
-        let text =
-          i > 0
-            ? `${a.charAt(0).toUpperCase()}${a.substring(1).toLowerCase()}`
-            : a.toLowerCase();
-        return text;
-      })
-      .join("");
-  } else return clean;
-}
-
-function codegenResult(
-  { name: tagName, props, propTypes }: Snippet,
-  params: ParamsValues,
-  name: string
-): CodegenResult[] {
-  const result: CodegenResult[] = [];
-
-  for (let title in props) {
-    let code = "";
-    const propObject = props[title];
-    if (Array.isArray(propObject)) {
-      const arr: string[] = [];
-      propObject.forEach((object) => {
-        const children =
-          "children" in object ? formatValue(object.children, params) : null;
-        arr.push(formatInstance(tagName, object, propTypes, params, children));
-      });
-      code = arr.join("\n");
-    } else {
-      const children =
-        "children" in propObject
-          ? formatValue(propObject.children, params)
-          : null;
-      code = formatInstance(tagName, propObject, propTypes, params, children);
-    }
-    result.push({
-      language: "JAVASCRIPT",
-      code,
-      title: `${name}: ${title}`,
-    });
+  function optionNameFromVariant(name: string = "") {
+    const clean = name.replace(/[^a-zA-Z\d-_ ]/g, "");
+    if (clean.match("-")) {
+      return clean.replace(/ +/g, "-").toLowerCase();
+    } else if (clean.match("_")) {
+      return clean.replace(/ +/g, "_").toLowerCase();
+    } else if (clean.match(" ") || clean.match(/^[A-Z]/)) {
+      return clean
+        .split(/ +/)
+        .map((a, i) => {
+          let text =
+            i > 0
+              ? `${a.charAt(0).toUpperCase()}${a.substring(1).toLowerCase()}`
+              : a.toLowerCase();
+          return text;
+        })
+        .join("");
+    } else return clean;
   }
 
-  return result;
+  return params;
 }
 
 function formatValue(rawValue: string, params: ParamsValues): string | null {
@@ -188,7 +177,7 @@ function formatValue(rawValue: string, params: ParamsValues): string | null {
   return value !== "undefined" ? value : null;
 }
 
-function renderProps(
+function formatProps(
   props: BasicObject,
   propTypes: BasicObject,
   params: ParamsValues
@@ -208,57 +197,6 @@ function renderProps(
   return propsArr;
 }
 
-function isComponentPropertyDefinitions(
-  object: ComponentProperties | ComponentPropertyDefinitions
-): object is ComponentPropertyDefinitions {
-  const key = Object.keys(object)[0];
-  return "defaultValue" in object[key];
-}
-
-function isComponentNode(
-  node: SceneNode
-): node is ComponentNode | ComponentSetNode | InstanceNode {
-  return (
-    node.type === "COMPONENT" ||
-    node.type === "COMPONENT_SET" ||
-    node.type === "INSTANCE"
-  );
-}
-
-function isString(value: string | boolean): value is string {
-  return value.toString() === value;
-}
-
-function getSnippets(): { [k: string]: Snippet } {
-  return JSON.parse(JSON.stringify(snippetsJSON));
-}
-
-function capitalize(name: string) {
-  return `${name.charAt(0).toUpperCase()}${name.slice(1)}`;
-}
-
-function downcase(name: string) {
-  return `${name.charAt(0).toLowerCase()}${name.slice(1)}`;
-}
-function numericGuard(name: string) {
-  if (name.charAt(0).match(/\d/)) {
-    name = `N${name}`;
-  }
-  return name;
-}
-function capitalizedNameFromName(name: string) {
-  name = numericGuard(name);
-  return name
-    .split(/[^a-zA-Z\d]+/g)
-    .map(capitalize)
-    .join("");
-}
-
-function sanitizePropertyName(name: string) {
-  name = name.replace(/#[^#]+$/g, "");
-  return downcase(capitalizedNameFromName(name).replace(/^\d+/g, ""));
-}
-
 function formatInstance(
   tagName: string,
   object: BasicObject,
@@ -267,7 +205,7 @@ function formatInstance(
   children: string | null
 ) {
   const singleLine = Object.keys(object).length <= 3;
-  const array = [`<${tagName}`, ...renderProps(object, propTypes, params)];
+  const array = [`<${tagName}`, ...formatProps(object, propTypes, params)];
   if (children) {
     array.push(">", `  ${children}`, `</${tagName}>`);
   } else {

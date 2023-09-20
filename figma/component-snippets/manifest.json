@@ -6,6 +6,6 @@
   "capabilities": ["codegen"],
   "permissions": [],
   "codegenLanguages": [{ "label": "Snippets", "value": "snippets" }],
-  "main": "code.js",
+  "main": "dist/code.js",
   "networkAccess": { "allowedDomains": ["none"] }
 }
