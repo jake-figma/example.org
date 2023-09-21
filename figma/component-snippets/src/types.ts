@@ -7,14 +7,23 @@ export type ParamsMap = {
   };
 };
 export interface BasicObject {
-  [k: string]: string;
+  [k: string]: string | undefined;
 }
 export type ParamsValues = BasicObject;
 
-export interface Snippet {
+type SnippetStrings = {
+  [k: string]:
+    | string
+    | string[]
+    | undefined
+    | BasicObject
+    | {
+        [k: string]: BasicObject | BasicObject[];
+      };
+};
+export interface Snippet extends SnippetStrings {
   name: string;
-  props: {
-    [k: string]: BasicObject | BasicObject[];
-  };
-  propTypes: BasicObject;
+  alternates?: string[];
+  params: BasicObject;
+  props: BasicObject;
 }

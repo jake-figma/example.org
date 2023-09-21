@@ -1,6 +1,22 @@
 {
   "name": "Button",
+  "alternates": ["ButtonTwo"],
+  "params": {
+    "@iconEnd": "undefined",
+    "@iconStart": "undefined",
+    "@label": "Hello world!",
+    "@state": "undefined",
+    "@variant": "primary"
+  },
   "props": {
+    "*": "string",
+    "disabled": "boolean",
+    "iconEnd": "node",
+    "iconStart": "node",
+    "onClick": "function"
+  },
+  "ButtonTwo": "Button",
+  "Button": {
     "Required": {
       "children": "@label",
       "disabled": "@state=disabled?true:undefined",
@@ -25,12 +41,5 @@
       { "component": "button", "type": "submit" },
       { "component": "a", "href": "https://www.example.org" }
     ]
-  },
-  "propTypes": {
-    "*": "string",
-    "disabled": "boolean",
-    "iconEnd": "node",
-    "iconStart": "node",
-    "onClick": "function"
   }
 }

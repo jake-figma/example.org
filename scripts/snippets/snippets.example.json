@@ -1,7 +1,23 @@
 {
   "Button": {
     "name": "Button",
+    "alternates": ["ButtonTwo"],
+    "params": {
+      "@iconEnd": "undefined",
+      "@iconStart": "undefined",
+      "@label": "Hello world!",
+      "@state": "undefined",
+      "@variant": "primary"
+    },
     "props": {
+      "*": "string",
+      "disabled": "boolean",
+      "iconEnd": "node",
+      "iconStart": "node",
+      "onClick": "function"
+    },
+    "ButtonTwo": "Button",
+    "Button": {
       "Required": {
         "children": "@label",
         "disabled": "@state=disabled?true:undefined",
@@ -36,55 +52,55 @@
           "href": "https://www.example.org"
         }
       ]
-    },
-    "propTypes": {
-      "*": "string",
-      "disabled": "boolean",
-      "iconEnd": "node",
-      "iconStart": "node",
-      "onClick": "function"
     }
   },
   "IconButton": {
     "name": "IconButton",
-    "props": {
-      "Required": {
-        "ariaLabel": "Describe the action",
-        "disabled": "@state=disabled?true:undefined",
-        "icon": "<@icon />",
-        "onClick": "() => {}",
-        "variant": "@variant"
-      },
-      "All": {
-        "ariaLabel": "Describe the action",
-        "component": "button",
-        "disabled": "@state=disabled?true:undefined",
-        "icon": "<@icon />",
-        "onClick": "() => {}",
-        "type": "button",
-        "variant": "@variant"
-      },
-      "Component/Type Permutations": [
-        {
-          "component": "button",
-          "type": "button",
-          "onClick": "() => {}"
-        },
-        {
-          "component": "button",
-          "type": "submit"
-        },
-        {
-          "component": "a",
-          "href": "https://www.example.org"
-        }
-      ]
+    "params": {
+      "@icon": "undefined",
+      "@state": "undefined",
+      "@variant": "primary"
     },
-    "propTypes": {
+    "props": {
       "*": "string",
       "disabled": "boolean",
       "icon": "node",
       "onClick": "function"
+    },
+    "IconButton": {
+      "props": {
+        "Required": {
+          "ariaLabel": "Describe the action",
+          "disabled": "@state=disabled?true:undefined",
+          "icon": "<@icon />",
+          "onClick": "() => {}",
+          "variant": "@variant"
+        },
+        "All": {
+          "ariaLabel": "Describe the action",
+          "component": "button",
+          "disabled": "@state=disabled?true:undefined",
+          "icon": "<@icon />",
+          "onClick": "() => {}",
+          "type": "button",
+          "variant": "@variant"
+        },
+        "Component/Type Permutations": [
+          {
+            "component": "button",
+            "type": "button",
+            "onClick": "() => {}"
+          },
+          {
+            "component": "button",
+            "type": "submit"
+          },
+          {
+            "component": "a",
+            "href": "https://www.example.org"
+          }
+        ]
+      }
     }
   }
 }

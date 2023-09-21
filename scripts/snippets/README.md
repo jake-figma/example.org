@@ -2,6 +2,52 @@
 
 A way to represent a dynamic snippet for markup or component usage.
 
+TODO: map component names to specific snippets. eg. Search/Input in Figma might all be one Input component in code but with specific values for its properties. You can either supply custom snippets or map an alternate to another snippet key.
+
+```json
+{
+  "name": "Input",
+  "alternates": ["InputField", "Search"],
+  "params": {
+    "@iconEnd": "undefined",
+    "@iconStart": "undefined",
+    "@placeholder": "Text here...",
+    "@value": "Value"
+  },
+  "props": {
+    "iconEnd": "node",
+    "iconStart": "node",
+    "onChange": "function",
+    "onInput": "function",
+    "placeholder": "string",
+    "type": "string",
+    "value": "string"
+  },
+  "Input": {
+    "All": {
+      "iconEnd": "<@iconEnd />",
+      "iconStart": "<@iconStart />",
+      "onChange": "() => {}",
+      "onInput": "() => {}",
+      "placeholder": "@placeholder",
+      "type": "text",
+      "value": "@value"
+    }
+  },
+  "InputField": "Input",
+  "Search": {
+    "Something": {
+      "iconStart": "<IconSearch />",
+      "onChange": "() => {}",
+      "onInput": "() => {}",
+      "placeholder": "@placeholder",
+      "type": "search",
+      "value": "@value"
+    }
+  }
+}
+```
+
 ## Markup
 
 ```json

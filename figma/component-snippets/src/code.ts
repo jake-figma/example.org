@@ -20,7 +20,13 @@ figma.codegen.on("generate", (event) => {
         },
       ]);
     }
-    const snippets = JSON.parse(JSON.stringify(snippetsJSON));
+    const snippets = JSON.parse(JSON.stringify(snippetsJSON)) as {
+      [k: string]: Snippet;
+    };
+    for (let name in snippets) {
+      const { alternates = [] } = snippets[name];
+      alternates.forEach((alternate) => (snippets[alternate] = snippets[name]));
+    }
     const rawName =
       node.parent && node.parent.type === "COMPONENT_SET"
         ? node.parent.name
@@ -28,7 +34,7 @@ figma.codegen.on("generate", (event) => {
     const name = capitalizedNameFromName(rawName);
     const snippet: Snippet = snippets[name];
     if (snippet) {
-      const params = await paramsFromNode(node);
+      const params = await paramsFromNode(node, snippet.params);
       resolve(codegenResult(snippet, params, name));
     } else {
       resolve([
@@ -43,29 +49,28 @@ figma.codegen.on("generate", (event) => {
 });
 
 function codegenResult(
-  { name: tagName, props, propTypes }: Snippet,
-  params: ParamsValues,
+  snippet: Snippet,
+  paramsValues: ParamsValues,
   name: string
 ): CodegenResult[] {
   const result: CodegenResult[] = [];
-
-  for (let title in props) {
+  const { name: tagName, params, props } = snippet;
+  const key: string =
+    typeof snippet[name] === "string" ? (snippet[name] as string) : name;
+  const snippetObject = snippet[key] as {
+    [k: string]: BasicObject | BasicObject[];
+  };
+  for (let title in snippetObject) {
     let code = "";
-    const propObject = props[title];
+    const propObject = snippetObject[title];
     if (Array.isArray(propObject)) {
       const arr: string[] = [];
       propObject.forEach((object) => {
-        const children =
-          "children" in object ? formatValue(object.children, params) : null;
-        arr.push(formatInstance(tagName, object, propTypes, params, children));
+        arr.push(formatInstance(tagName, object, props, params, paramsValues));
       });
       code = arr.join("\n");
     } else {
-      const children =
-        "children" in propObject
-          ? formatValue(propObject.children, params)
-          : null;
-      code = formatInstance(tagName, propObject, propTypes, params, children);
+      code = formatInstance(tagName, propObject, props, params, paramsValues);
     }
     result.push({
       language: "JAVASCRIPT",
@@ -78,7 +83,8 @@ function codegenResult(
 }
 
 async function paramsFromNode(
-  node: ComponentNode | ComponentSetNode | InstanceNode
+  node: ComponentNode | ComponentSetNode | InstanceNode,
+  params: BasicObject
 ) {
   const nodeToProcess =
     node.type === "COMPONENT"
@@ -114,7 +120,7 @@ async function paramsFromNode(
       }
     }
   }
-  const params: ParamsValues = {};
+  const paramsValues: ParamsValues = Object.assign({}, params);
   const types: ComponentPropertyType[] = ["TEXT", "VARIANT", "INSTANCE_SWAP"];
   for (let key in object) {
     const item = object[key];
@@ -134,7 +140,7 @@ async function paramsFromNode(
     if (value === undefined && hasBoolean) {
       value = item.BOOLEAN;
     }
-    params[`@${key}`] = (value || "").toString() || "";
+    paramsValues[`@${key}`] = (value || "").toString() || "";
   }
 
   function optionNameFromVariant(name: string = "") {
@@ -160,13 +166,19 @@ async function paramsFromNode(
   return params;
 }
 
-function formatValue(rawValue: string, params: ParamsValues): string | null {
+function formatValue(
+  rawValue: string,
+  paramsValues: ParamsValues,
+  params: BasicObject
+): string | null {
   let value = rawValue;
-  for (let p in params) {
+  for (let p in paramsValues) {
+    const defaultValue =
+      params[p] && params[p] !== "undefined" ? params[p] : undefined;
     value =
-      value.match(p) && params[p] === "undefined"
-        ? "undefined"
-        : value.replace(new RegExp(p, "g"), params[p]);
+      value.match(p) && paramsValues[p] === "undefined"
+        ? defaultValue || "undefined"
+        : value.replace(new RegExp(p, "g"), paramsValues[p] || "");
   }
   const ternary = value.match(/^(.+)=(.+)\?(.+):(.+)$/);
   if (ternary) {
@@ -178,15 +190,16 @@ function formatValue(rawValue: string, params: ParamsValues): string | null {
 }
 
 function formatProps(
+  object: BasicObject,
   props: BasicObject,
-  propTypes: BasicObject,
-  params: ParamsValues
+  params: BasicObject,
+  paramsValues: ParamsValues
 ) {
   const propsArr = [];
-  for (let propName in props) {
+  for (let propName in object) {
     if (propName !== "children") {
-      const type = propTypes[propName] || propTypes["*"] || "string";
-      const value = formatValue(props[propName], params);
+      const type = props[propName] || props["*"] || "string";
+      const value = formatValue(object[propName] || "", paramsValues, params);
       if (value !== null) {
         propsArr.push(
           `  ${propName}=` + (type === "string" ? `"${value}"` : `{${value}}`)
@@ -200,12 +213,19 @@ function formatProps(
 function formatInstance(
   tagName: string,
   object: BasicObject,
-  propTypes: BasicObject,
-  params: ParamsValues,
-  children: string | null
+  props: BasicObject,
+  params: BasicObject,
+  paramsValues: ParamsValues
 ) {
+  const children =
+    "children" in object && object.children
+      ? formatValue(object.children, paramsValues, params)
+      : null;
   const singleLine = Object.keys(object).length <= 3;
-  const array = [`<${tagName}`, ...formatProps(object, propTypes, params)];
+  const array = [
+    `<${tagName}`,
+    ...formatProps(object, props, params, paramsValues),
+  ];
   if (children) {
     array.push(">", `  ${children}`, `</${tagName}>`);
   } else {
