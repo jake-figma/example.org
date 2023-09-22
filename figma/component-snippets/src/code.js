@@ -20,7 +20,7 @@ figma.codegen.on("generate", (event) => {
         },
       ]);
     }
-    const snippets = snippetsJSON;
+    const snippets = JSON.parse(JSON.stringify(snippetsJSON));
     for (let name in snippets) {
       const { alternates = [] } = snippets[name];
       alternates.forEach((alternate) => (snippets[alternate] = snippets[name]));

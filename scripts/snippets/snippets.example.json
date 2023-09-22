@@ -68,39 +68,37 @@
       "onClick": "function"
     },
     "IconButton": {
-      "props": {
-        "Required": {
-          "ariaLabel": "Describe the action",
-          "disabled": "@state=disabled?true:undefined",
-          "icon": "<@icon />",
-          "onClick": "() => {}",
-          "variant": "@variant"
-        },
-        "All": {
-          "ariaLabel": "Describe the action",
+      "Required": {
+        "ariaLabel": "Describe the action",
+        "disabled": "@state=disabled?true:undefined",
+        "icon": "<@icon />",
+        "onClick": "() => {}",
+        "variant": "@variant"
+      },
+      "All": {
+        "ariaLabel": "Describe the action",
+        "component": "button",
+        "disabled": "@state=disabled?true:undefined",
+        "icon": "<@icon />",
+        "onClick": "() => {}",
+        "type": "button",
+        "variant": "@variant"
+      },
+      "Component/Type Permutations": [
+        {
           "component": "button",
-          "disabled": "@state=disabled?true:undefined",
-          "icon": "<@icon />",
-          "onClick": "() => {}",
           "type": "button",
-          "variant": "@variant"
+          "onClick": "() => {}"
         },
-        "Component/Type Permutations": [
-          {
-            "component": "button",
-            "type": "button",
-            "onClick": "() => {}"
-          },
-          {
-            "component": "button",
-            "type": "submit"
-          },
-          {
-            "component": "a",
-            "href": "https://www.example.org"
-          }
-        ]
-      }
+        {
+          "component": "button",
+          "type": "submit"
+        },
+        {
+          "component": "a",
+          "href": "https://www.example.org"
+        }
+      ]
     }
   }
 }
