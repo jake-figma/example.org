@@ -4,11 +4,22 @@
   border-radius: var(--size-24);
   color: var(--button-color, var(--color-text-contrast));
   cursor: pointer;
-  display: inline-block;
+  display: flex;
   font-size: 1.125rem;
   line-height: 2rem;
   padding: var(--size-8) var(--size-24);
   position: relative;
+}
+.button-base.button-base-icon-start,
+.button-base.button-base-icon-end {
+  align-items: center;
+  gap: var(--size-8);
+}
+.button-base.button-base-icon-start {
+  padding-left: var(--size-16);
+}
+.button-base.button-base-icon-end {
+  padding-right: var(--size-16);
 }
 .button-base.button-base-icon-only {
   padding: var(--size-8);

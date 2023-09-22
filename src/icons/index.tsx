@@ -167,7 +167,12 @@ export const IconCheck = ({ size = "md" }: IconProps = {}) => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <path d="M6 12L10 16L18 8" stroke="var(--icon-fill)" />
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M18.3536 8.35359L10 16.7071L5.64648 12.3536L6.35359 11.6465L10 15.2929L17.6465 7.64648L18.3536 8.35359Z"
+      fill="var(--icon-fill)"
+    />
   </svg>
 );
 export const IconCheckOutlined = ({ size = "md" }: IconProps = {}) => (
@@ -358,8 +363,10 @@ export const IconPlay = ({ size = "md" }: IconProps = {}) => (
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      d="M6.5 4.80902L20.882 12L6.5 19.191L6.5 4.80902Z"
-      stroke="var(--icon-fill)"
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M22 12L6 4V20L22 12ZM19.7639 12L7 5.61803L7 18.382L19.7639 12Z"
+      fill="var(--icon-fill)"
     />
   </svg>
 );

@@ -8,7 +8,7 @@
     "app:build": "tsc && vite build",
     "app:lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "app:preview": "vite preview",
-    "storybook:run": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
     "chromatic": "npx chromatic",
     "script:snippets": "node scripts/snippets/snippets.cjs",

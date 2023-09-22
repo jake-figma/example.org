@@ -9,7 +9,11 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-  argTypes: {},
+  argTypes: {
+    icon: {
+      options: ["undefined", <IconCheck />],
+    },
+  },
 } satisfies Meta<typeof IconButton>;
 
 export default meta;
