@@ -1,12 +1,12 @@
 import {
   ButtonBase,
-  ButtonBaseComponentProps,
+  ButtonBaseElementProps,
   ButtonBaseIconsProps,
   ButtonBaseSharedProps,
 } from "./ButtonBase";
 
 type ButtonProps = ButtonBaseSharedProps &
-  ButtonBaseComponentProps &
+  ButtonBaseElementProps &
   ButtonBaseIconsProps;
 
 /**

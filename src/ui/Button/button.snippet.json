@@ -28,7 +28,7 @@
     "All": {
       "ariaLabel": "Only when label is not descriptive of the action",
       "children": "@label",
-      "component": "button",
+      "element": "button",
       "disabled": "@state=disabled?true:undefined",
       "iconEnd": "<@iconEnd />",
       "iconStart": "<@iconStart />",
@@ -36,10 +36,10 @@
       "type": "button",
       "variant": "@variant"
     },
-    "Component/Type Permutations": [
-      { "component": "button", "type": "button", "onClick": "() => {}" },
-      { "component": "button", "type": "submit" },
-      { "component": "a", "href": "https://www.example.org" }
+    "Element/Type Permutations": [
+      { "element": "button", "type": "button", "onClick": "() => {}" },
+      { "element": "button", "type": "submit" },
+      { "element": "a", "href": "https://www.example.org" }
     ]
   }
 }

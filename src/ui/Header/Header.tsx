@@ -31,7 +31,7 @@ export const Header: FC<HeaderProps> = ({
             <span className="welcome">
               Welcome, <b>{user.name}</b>!
             </span>
-            <Button component="a" href="https://google.com" onClick={onLogout}>
+            <Button element="a" href="https://google.com" onClick={onLogout}>
               Log out
             </Button>
           </>

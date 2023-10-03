@@ -25,7 +25,7 @@ export const TypeButton: Story = {
     variant: "primary",
     disabled: false,
     icon: <IconCheck />,
-    component: "button",
+    element: "button",
     onClick: () => {},
   },
 };
@@ -35,7 +35,7 @@ export const TypeAnchor: Story = {
     variant: "primary",
     disabled: false,
     icon: <IconCheck />,
-    component: "a",
+    element: "a",
     href: "https://www.figma.com",
     onClick: () => {},
   },

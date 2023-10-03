@@ -1,5 +1,5 @@
 import { ReactEventHandler, ReactNode } from "react";
-import "./button.css";
+import "./buttonBase.css";
 
 type ButtonBasePropsVariant = "primary" | "secondary" | "inverse" | "positive";
 
@@ -33,12 +33,12 @@ export interface ButtonBaseIconsProps {
   iconStart?: ReactNode;
 }
 
-interface ButtonBaseComponentAnchorProps {
+interface ButtonBaseElementAnchorProps {
   /**
    * html "anchor" element
    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a
    */
-  component: "a";
+  element: "a";
   /**
    * The destination url
    */
@@ -49,16 +49,16 @@ interface ButtonBaseComponentAnchorProps {
   onClick?: ReactEventHandler<HTMLAnchorElement>;
 }
 
-interface ButtonBaseComponentButtonSharedProps {
+interface ButtonBaseElementButtonSharedProps {
   /**
    * html "button" element.
    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button
    */
-  component?: "button";
+  element?: "button";
   href?: undefined;
 }
 
-interface ButtonBaseComponentButtonTypeButtonProps {
+interface ButtonBaseElementButtonTypeButtonProps {
   /**
    * Required click handler for buttons
    */
@@ -69,7 +69,7 @@ interface ButtonBaseComponentButtonTypeButtonProps {
    */
   type?: "button";
 }
-interface ButtonBaseComponentButtonTypeSubmitProps {
+interface ButtonBaseElementButtonTypeSubmitProps {
   /**
    * Optional click handler for buttons
    */
@@ -81,10 +81,10 @@ interface ButtonBaseComponentButtonTypeSubmitProps {
   type: "submit";
 }
 
-type ButtonBaseComponentButtonProps = ButtonBaseComponentButtonSharedProps &
+type ButtonBaseElementButtonProps = ButtonBaseElementButtonSharedProps &
   (
-    | ButtonBaseComponentButtonTypeButtonProps
-    | ButtonBaseComponentButtonTypeSubmitProps
+    | ButtonBaseElementButtonTypeButtonProps
+    | ButtonBaseElementButtonTypeSubmitProps
   );
 
 export interface ButtonBaseSharedProps {
@@ -99,13 +99,13 @@ export interface ButtonBaseSharedProps {
   variant?: ButtonBasePropsVariant;
 }
 
-export type ButtonBaseComponentProps =
-  | ButtonBaseComponentAnchorProps
-  | ButtonBaseComponentButtonProps;
+export type ButtonBaseElementProps =
+  | ButtonBaseElementAnchorProps
+  | ButtonBaseElementButtonProps;
 
 type ButtonBaseProps = ButtonBaseSharedProps &
   (ButtonBaseIconOnlyProps | ButtonBaseIconsProps) &
-  ButtonBaseComponentProps;
+  ButtonBaseElementProps;
 
 function isIconOnlyProps(
   props: Partial<ButtonBaseProps>
@@ -117,15 +117,15 @@ function isIconsProps(
 ): props is ButtonBaseIconsProps {
   return !isIconOnlyProps(props);
 }
-function isComponentAnchorProps(
+function isElementAnchorProps(
   props: Partial<ButtonBaseProps>
-): props is ButtonBaseComponentAnchorProps {
-  return props.component === "a";
+): props is ButtonBaseElementAnchorProps {
+  return props.element === "a";
 }
-function isComponentButtonProps(
+function isElementButtonProps(
   props: Partial<ButtonBaseProps>
-): props is ButtonBaseComponentButtonProps {
-  return props.component !== "a";
+): props is ButtonBaseElementButtonProps {
+  return props.element !== "a";
 }
 
 /**
@@ -156,7 +156,7 @@ export const ButtonBase = ({
     }
   }
 
-  if (isComponentAnchorProps(props)) {
+  if (isElementAnchorProps(props)) {
     if (disabled) classNames.push("button-base-disabled");
     return (
       <a
@@ -169,7 +169,7 @@ export const ButtonBase = ({
       </a>
     );
   }
-  if (isComponentButtonProps(props))
+  if (isElementButtonProps(props))
     return (
       <button
         aria-label={ariaLabel}

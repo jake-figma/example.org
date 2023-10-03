@@ -29,7 +29,7 @@ export const TypeButton: Story = {
     variant: "primary",
     children: "Hello World!",
     disabled: false,
-    component: "button",
+    element: "button",
     onClick: () => {},
   },
 };
@@ -38,7 +38,7 @@ export const TypeAnchor: Story = {
     variant: "primary",
     children: "Hello World!",
     disabled: false,
-    component: "a",
+    element: "a",
     href: "https://www.figma.com",
     onClick: () => {
       alert("optional!");

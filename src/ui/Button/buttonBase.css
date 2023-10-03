@@ -37,7 +37,7 @@
   outline: none;
 }
 .button-base:focus-visible::after {
-  border-radius: var(--size-24) var(--size-8);
+  border-radius: var(--size-24);
   bottom: -2px;
   box-shadow: 0 0 0 2px var(--color-focus-ring);
   content: "";
