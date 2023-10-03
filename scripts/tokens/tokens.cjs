@@ -12,8 +12,8 @@ const processed = {
   color: { primitive: {}, semantic: {} },
   size: { primitive: {}, semantic: {} },
 };
-processCollection(data, "@primitive_color", "@semantic_color", processed.color);
-processCollection(data, "@primitive_size", "@semantic_size", processed.size);
+processCollection(data, "@color_primitive", "@color_semantic", processed.color);
+processCollection(data, "@size_primitive", "@size_semantic", processed.size);
 
 function processCollection(data, primitiveKey, semanticKey, processed) {
   traverse(processed.primitive, data[primitiveKey], primitiveKey, semanticKey);

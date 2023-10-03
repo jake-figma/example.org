@@ -22,8 +22,10 @@ if (figma.mode === "codegen") {
   exportToJSON();
 }
 
-function recurseVariables(variables, list) {
+function recurseVariables(variable, list) {
+  const variables = Array.isArray(variable) ? variable : [variable];
   variables.forEach((variable) => {
+    if (!variable || !variable.id) return;
     const { name, variableCollectionId, resolvedType, valuesByMode } =
       figma.variables.getVariableById(variable.id);
     const collection =
@@ -51,7 +53,7 @@ function recurseVariables(variables, list) {
       if (value.type === "VARIABLE_ALIAS") {
         const variable = figma.variables.getVariableById(value.id);
         const v = {};
-        recurseVariables([variable], v);
+        recurseVariables(variable, v);
         if (isSingleMode) {
           item.value = v;
         } else {

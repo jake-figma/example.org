@@ -113,11 +113,13 @@
   --color-icon-brand: var(--color-blue-400);
   --color-icon-contrast: var(--color-mono-100);
   --color-icon-default: var(--color-mono-500);
+  --color-icon-subdued: var(--color-mono-400);
   --color-text-body: var(--color-mono-500);
   --color-text-contrast: var(--color-mono-100);
   --color-text-error: var(--color-red-500);
   --color-text-inactive: var(--color-mono-300);
   --color-text-link: var(--color-blue-400);
+  --color-text-subdued: var(--color-mono-400);
 }
 
 /* Color Dark Mode */
@@ -149,10 +151,12 @@
     --color-icon-brand: var(--color-blue-200);
     --color-icon-contrast: var(--color-mono-500);
     --color-icon-default: var(--color-mono-100);
+    --color-icon-subdued: var(--color-mono-400);
     --color-text-body: var(--color-mono-100);
     --color-text-contrast: var(--color-mono-500);
     --color-text-error: var(--color-red-100);
     --color-text-inactive: var(--color-mono-300);
     --color-text-link: var(--color-blue-200);
+    --color-text-subdued: var(--color-mono-400);
   }
 }

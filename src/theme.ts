@@ -27,11 +27,13 @@ const theme = {
     iconBrand: "var(--color-icon-brand)",
     iconContrast: "var(--color-icon-contrast)",
     iconDefault: "var(--color-icon-default)",
+    iconSubdued: "var(--color-icon-subdued)",
     textBody: "var(--color-text-body)",
     textContrast: "var(--color-text-contrast)",
     textError: "var(--color-text-error)",
     textInactive: "var(--color-text-inactive)",
-    textLink: "var(--color-text-link)"
+    textLink: "var(--color-text-link)",
+    textSubdued: "var(--color-text-subdued)"
   },
   size: {
     gapLg: "var(--gap-lg)",
