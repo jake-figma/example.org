@@ -20,6 +20,7 @@ export const TypeButton: Story = {
     children: "Hello World!",
     disabled: false,
     element: "button",
+    iconEnd: <IconArrowRight />,
     onClick: () => {},
   },
 };
@@ -30,6 +31,7 @@ export const TypeAnchor: Story = {
     disabled: false,
     element: "a",
     href: "https://www.figma.com",
+    iconStart: <IconArrowLeft />,
     onClick: () => {
       alert("optional!");
     },
