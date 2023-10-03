@@ -14,7 +14,7 @@ async function run() {
               .replace("<svg ", "<svg className={`icon icon-size-${size}`} ")
               .replace(/</g, "&lt;")
               .replace(/\n *?/g, "")
-              .replace(/"#...(...)"/g, `"var(--icon-fill)"`);
+              .replace(/fill="[^"]+"/g, `fill="var(--icon-fill)"`);
             const code = `
 export const ${component.name
               .split(" ")

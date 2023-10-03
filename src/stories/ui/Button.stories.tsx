@@ -9,16 +9,6 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-  argTypes: {
-    iconEnd: {
-      control: "radio",
-      options: [undefined, <IconArrowRight />],
-    },
-    iconStart: {
-      control: "radio",
-      options: [undefined, <IconArrowLeft />],
-    },
-  },
 } satisfies Meta<typeof Button>;
 
 export default meta;
