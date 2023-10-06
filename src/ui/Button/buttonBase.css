@@ -22,10 +22,10 @@
   padding-right: var(--size-16);
 }
 .button-base.button-base-icon-only {
-  padding: var(--size-8);
+  padding: var(--size-12);
 }
 .button-base .icon {
-  --icon-fill: var(--button-color, var(--color-text-contrast));
+  --icon-fill: var(--button-icon, var(--color-icon-contrast));
 }
 .button-base:hover {
   --button-bg: var(--button-bg-hover, var(--color-bg-brand-hover));
@@ -64,17 +64,16 @@
   --button-bg-active: var(--color-bg-inactive);
   --button-bg-hover: var(--color-bg-subtle);
   --button-color: var(--color-text-body);
+  --button-icon: var(--color-icon-default);
 }
-.button-base-variant-positive {
-  --button-bg: var(--color-bg-success);
-  --button-bg-active: var(--color-bg-success-active);
-  --button-bg-hover: var(--color-bg-success-hover);
-  --button-color: var(--color-text-body);
+.button-base-variant-inverse:focus-visible {
+  --button-bg: var(--color-bg-subtle);
 }
 .button-base.button-base-disabled,
 .button-base:disabled {
   cursor: not-allowed;
   pointer-events: none;
   --button-bg: var(--color-bg-inactive);
-  --button-color: var(--color-text-body);
+  --button-color: var(--color-text-subdued);
+  --button-icon: var(--color-icon-subdued);
 }

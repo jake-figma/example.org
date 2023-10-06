@@ -1,7 +1,7 @@
 import { ReactEventHandler, ReactNode } from "react";
 import "./buttonBase.css";
 
-type ButtonBasePropsVariant = "primary" | "secondary" | "inverse" | "positive";
+type ButtonBasePropsVariant = "primary" | "secondary" | "inverse";
 
 export interface ButtonBaseIconOnlyProps {
   /**
