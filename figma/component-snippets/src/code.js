@@ -141,5 +141,5 @@ async function paramsFromNode(node, params) {
     } else return clean;
   }
 
-  return params;
+  return paramsValues;
 }
