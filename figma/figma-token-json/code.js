@@ -138,7 +138,7 @@ function valueToJSON(value, resolvedType, collectionIdToKeyMap) {
   if (value.type === "VARIABLE_ALIAS") {
     const variable = figma.variables.getVariableById(value.id);
     const prefix = collectionIdToKeyMap[variable.variableCollectionId];
-    return `{${prefix}_${variable.name.replace(/\//g, ".")}}`;
+    return `{${prefix}.${variable.name.replace(/\//g, ".")}}`;
   }
   return resolvedType === "COLOR" ? rgbToHex(value) : value;
 }
@@ -170,16 +170,14 @@ function sanitizeName(name) {
 }
 
 function rgbToHex({ r, g, b, a }) {
-  if (a !== 1) {
-    return `rgba(${[r, g, b]
-      .map((n) => Math.round(n * 255))
-      .join(", ")}, ${a.toFixed(4)})`;
-  }
   const toHex = (value) => {
     const hex = Math.round(value * 255).toString(16);
     return hex.length === 1 ? "0" + hex : hex;
   };
 
-  const hex = [toHex(r), toHex(g), toHex(b)].join("");
-  return `#${hex}`;
+  const hex = [toHex(r), toHex(g), toHex(b)];
+  if (a !== 1) {
+    hex.push(toHex(a));
+  }
+  return `#${hex.join("")}`;
 }
