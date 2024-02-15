@@ -63,16 +63,7 @@ function codegenResult(snippet, paramsValues, name) {
 }
 
 async function paramsFromNode(node, params) {
-  const nodeToProcess =
-    node.type === "COMPONENT"
-      ? node.parent && node.parent.type === "COMPONENT_SET"
-        ? node.parent
-        : node
-      : node;
-  const valueObject =
-    nodeToProcess.type === "INSTANCE"
-      ? nodeToProcess.componentProperties
-      : nodeToProcess.componentPropertyDefinitions;
+  const valueObject = valueObjectFromNode(node);
   const object = {};
   const isDefinitions =
     "defaultValue" in valueObject[Object.keys(valueObject)[0]];
@@ -142,4 +133,26 @@ async function paramsFromNode(node, params) {
   }
 
   return paramsValues;
+}
+
+function valueObjectFromNode(node) {
+  if (node.type === "INSTANCE") return node.componentProperties;
+  if (node.type === "COMPONENT_SET") return node.componentPropertyDefinitions;
+  if (node.type === "COMPONENT") {
+    if (node.parent.type === "COMPONENT_SET") {
+      const initialProps = Object.assign(
+        {},
+        node.parent.componentPropertyDefinitions
+      );
+      const nameProps = node.name.split(", ");
+      nameProps.forEach((prop) => {
+        const [propName, propValue] = prop.split("=");
+        initialProps[propName].defaultValue = propValue;
+      });
+      return initialProps;
+    } else {
+      return node.componentPropertyDefinitions;
+    }
+  }
+  return {};
 }
